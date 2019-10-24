@@ -1,0 +1,87 @@
+$primary: blue;
+$secondary: grey;
+
+.r-howler {
+    &.player {
+        background: white;
+        // padding: 10px;
+        border: 1px solid black;
+    }
+
+    .player-controls, .volume-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px;
+        // border: 1px solid black;
+    }
+
+    .player-button, .settings-button {
+        padding: 3px;
+        background-color: $primary;
+        color: white;
+        cursor: pointer;
+        border: none;
+        padding: inherit;
+        &.play {
+            background-image: url(./assets/play-button-arrow-svgrepo-com.svg);
+        }
+    }
+
+    .progress-bar {
+        flex: 1;
+        padding: 0 10px;
+    }
+    .player-progress {
+        width: 100%;
+        border: 0;
+        padding: 0;
+        // color: $primary;
+        -webkit-appearance: none;
+        background-color: $secondary;
+        height: 4px;
+        border-radius: 1px;
+        min-width: 50px;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 13px;
+            height: 13px;
+            background: #078dd8;
+            border-radius: 50%;
+            cursor: -moz-grab;
+            cursor: -webkit-grab; 
+        }
+    }
+
+    .volume-control {
+        // padding: 0 10px;
+
+        .audio-bar {
+            width: 100%;
+            border: 0;
+            padding: 0;
+            // color: $primary;
+            -webkit-appearance: none;
+            background-color: $secondary;
+            height: 4px;
+            border-radius: 1px;
+            min-width: 50px;
+            max-width: 100px;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 13px;
+                height: 13px;
+                background: #078dd8;
+                border-radius: 50%;
+                cursor: -moz-grab;
+                cursor: -webkit-grab; 
+            }
+        }
+    }
+
+    .audio-duration {
+        padding: 0 5px;
+    }
+}
