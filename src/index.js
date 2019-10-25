@@ -14,15 +14,18 @@ export default class PlayerComponent extends Component {
     state = {
         sound: null,
         playerState: 'PAUSE',
-        src: []
+        src: [],
+        progressValue: 0,
+        currentPos: '0:00'
     }
 
     readyToPlay = () => {
-        const { playerState } = this.state;
+        const { playerState, sound } = this.state;
         if (playerState === STATE.PLAYING) { return }
         console.log("playback ready");
         this.setState({
-            playerState: STATE.READY
+            playerState: STATE.READY,
+            duration: this.formatTime(Math.round(sound.duration()))
         });
     }
 
@@ -65,6 +68,8 @@ export default class PlayerComponent extends Component {
 
         sound.on('end', this.playbackEnded);
 
+        sound.on('play', this.step);
+
         this.setState({
             sound
         })
@@ -80,18 +85,58 @@ export default class PlayerComponent extends Component {
     //     return btnFunction;
     // }
 
+    /**
+     * Format the time from seconds to M:SS.
+     * @param  {Number} secs Seconds to format.
+     * @return {String}      Formatted time.
+     */
+    formatTime = (secs) => {
+        var minutes = Math.floor(secs / 60) || 0;
+        var seconds = (secs - minutes * 60) || 0;
+
+        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+    }
+
+    step = () => {
+        var self = this;
+
+        // Get the Howl we want to manipulate.
+        const { sound } = this.state
+
+        // Determine our current seek position.
+        var seek = sound.seek() || 0;
+        // timer.innerHTML = self.formatTime(Math.round(seek));
+        let percentage = (((seek / sound.duration()) * 100) || 0);
+        
+        this.setState({
+            progressValue: Math.round(percentage),
+            currentPos: this.formatTime(Math.round(seek))
+        })
+        
+        // progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
+
+        // If the sound is still playing, continue stepping.
+        if (sound.playing()) {
+            requestAnimationFrame(this.step);
+        }
+    }
+
     render() {
         const {
-            playerState
+            playerState,
+            progressValue,
+            duration,
+            currentPos
         } = this.state;
         let btnFunction = undefined;
 
-        let btnText = ''
+        let btnText = '...'
 
-        if (playerState===STATE.READY) {
+
+        if (playerState === STATE.READY) {
             btnFunction = this.playbackPlay;
             btnText = 'play'
-        } else if (playerState===STATE.PLAYING) {
+        } else if (playerState === STATE.PLAYING) {
             btnFunction = this.playbackPause;
             btnText = 'pause'
         }
@@ -112,11 +157,12 @@ export default class PlayerComponent extends Component {
                         id=""
                         min="0" max="100"
                         step="0.1"
+                        value={progressValue}
                         autoComplete="off"
                         />
                 </div>
                 <div className="audio-duration">
-                    03:00
+                    {currentPos} / {duration || '...'}
                 </div>
                 <div className="volume-control">
                     <div className="volume-button">
