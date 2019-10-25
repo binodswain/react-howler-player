@@ -153,8 +153,6 @@ export default class PlayerComponent extends Component {
                 <div className="progress-bar">
                     <input type="range" 
                         className="player-progress" 
-                        name="" 
-                        id=""
                         min="0" max="100"
                         step="0.1"
                         value={progressValue}
@@ -162,12 +160,10 @@ export default class PlayerComponent extends Component {
                         />
                 </div>
                 <div className="audio-duration">
-                    {currentPos} / {duration || '...'}
+                    {currentPos}/{duration || '...'}
                 </div>
                 <div className="volume-control">
-                    <div className="volume-button">
-                        vb
-                    </div>
+
                     <input type="range" className="audio-bar" name="" id=""/>
                     
                 </div>

@@ -1,6 +1,38 @@
 $primary: blue;
 $secondary: grey;
 
+// https://codepen.io/trevanhetzel/pen/rOVrGK
+@mixin rangeThumb {
+  width: 15px;
+  height: 15px;
+  margin: -5px 0  0;
+  border-radius: 50%;
+  background: #37adbf;
+  cursor: pointer;
+  border: 0 !important;
+}
+
+@mixin rangeTrack {
+  width: 100%;
+  height: 4px;
+//   cursor: pointer;
+  background: #b2b2b2;
+  border-radius: 4px;
+}
+
+
+@mixin rangeThumbCustom {
+    border: 1px solid #000000;
+    height: 16px;
+    width: 16px;
+    border-radius: 10px;
+    background: red;
+    cursor: pointer;
+    margin-top: 0; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+
 .r-howler {
     &.player {
         background: white;
@@ -8,7 +40,7 @@ $secondary: grey;
         border: 1px solid black;
     }
 
-    .player-controls, .volume-control {
+    .player-controls {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -32,25 +64,49 @@ $secondary: grey;
         flex: 1;
         padding: 0 10px;
     }
-    .player-progress {
+    .player-progress { // https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
         width: 100%;
         border: 0;
         padding: 0;
         // color: $primary;
         -webkit-appearance: none;
-        background-color: $secondary;
         height: 4px;
-        border-radius: 1px;
+        border-radius: 4px;
         min-width: 50px;
+        background: transparent;
+
+        &::-moz-range-thumb {
+            -webkit-appearance: none;
+            @include rangeThumb;
+        }
+
+        &::-ms-thumb {
+            -webkit-appearance: none;
+            @include rangeThumb;
+        }
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 13px;
-            height: 13px;
-            background: #078dd8;
-            border-radius: 50%;
-            cursor: -moz-grab;
-            cursor: -webkit-grab; 
+            @include rangeThumb;
+            
+        }
+
+        &:focus {
+           outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+        }
+
+        // Track
+        &::-webkit-slider-runnable-track {
+            @include rangeTrack;
+            margin-top: -6px;
+        }
+
+        &::-moz-range-track {
+            @include rangeTrack;
+        }
+
+        &::-ms-track {
+            @include rangeTrack;
         }
     }
 
@@ -63,20 +119,44 @@ $secondary: grey;
             padding: 0;
             // color: $primary;
             -webkit-appearance: none;
-            background-color: $secondary;
             height: 4px;
-            border-radius: 1px;
+            border-radius: 4px;
             min-width: 50px;
             max-width: 100px;
+            background: transparent;
+
+            &::-moz-range-thumb {
+                -webkit-appearance: none;
+                @include rangeThumb;
+            }
+
+            &::-ms-thumb {
+                -webkit-appearance: none;
+                @include rangeThumb;
+            }
 
             &::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                width: 13px;
-                height: 13px;
-                background: #078dd8;
-                border-radius: 50%;
-                cursor: -moz-grab;
-                cursor: -webkit-grab; 
+                @include rangeThumb;
+                
+            }
+
+            &:focus {
+            outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+            }
+
+            // Track
+            &::-webkit-slider-runnable-track {
+                @include rangeTrack;
+                margin-top: -6px;
+            }
+
+            &::-moz-range-track {
+                @include rangeTrack;
+            }
+
+            &::-ms-track {
+                @include rangeTrack;
             }
         }
     }
