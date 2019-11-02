@@ -130,25 +130,26 @@ export default class PlayerComponent extends Component {
         } = this.state;
         let btnFunction = undefined;
 
-        let btnText = '...'
+        // let btnText = '...'
 
 
         if (playerState === STATE.READY) {
             btnFunction = this.playbackPlay;
-            btnText = 'play'
+            // btnText = 'play'
         } else if (playerState === STATE.PLAYING) {
             btnFunction = this.playbackPause;
-            btnText = 'pause'
+            // btnText = 'pause'
         }
 
         return <div className="player r-howler">
             <div className="player-controls">
                 <button
-                    className="player-button"
+                    paused="true"
+                    className="playButton"
                     disabled={playerState !== STATE.READY}
                     onClick={()=>btnFunction()}
                 >
-                    {btnText}
+                    
                 </button>
                 <div className="progress-bar">
                     <input type="range" 
@@ -160,16 +161,14 @@ export default class PlayerComponent extends Component {
                         />
                 </div>
                 <div className="audio-duration">
-                    {currentPos}/{duration || '...'}
+                    {currentPos}<span className="duration">/{duration || '...'}</span>
                 </div>
                 <div className="volume-control">
-
+                    <button className="muteButton" muted="true">                        
+                    </button>
                     <input type="range" className="audio-bar" name="" id=""/>
                     
                 </div>
-                <button className="settings-button">
-                    set
-                </button>
             </div>
         </div>
     }
