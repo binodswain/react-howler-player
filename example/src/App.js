@@ -12,11 +12,18 @@ import Player from "react-howler-player";
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="playerlist">
         <Player
           src={[
             'https://testbucket1mmmm.s3.ap-south-1.amazonaws.com/TULSI+2020+For+The+Country+We+Love+-+Tulsi+Gabbard.mp3'
           ]}
+        />
+
+        <Player
+          src={[
+            'https://testbucket1mmmm.s3.ap-south-1.amazonaws.com/TULSI+2020+For+The+Country+We+Love+-+Tulsi+Gabbard.mp3'
+          ]}
+          isDark={true}
         />
       </div>
     )

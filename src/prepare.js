@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 export default class Prepare extends Component {
     render() {
+        const {
+            loadingText = 'Preparing'
+        } = this.props
         let className = [
             "player", "r-howler",
             this.props.isDark ? "dark-themed" : "light-themed"
@@ -10,7 +13,7 @@ export default class Prepare extends Component {
         return (
             <div className={className}>
                 <div className="prepare notready">
-                    Preparing
+                    {loadingText}
                 </div>
             </div>
         )

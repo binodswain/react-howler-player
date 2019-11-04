@@ -3,6 +3,7 @@ $primary: ("dark": #37adbf, "light":#37adbf);
 $slider-thumb-color: ("dark": #37adbf, "light": white);
 $secondary: ("dark": grey, "light": grey);
 $background-color: ("dark": rgba(26,26,26,.8), "light": white);
+$button-bgcolor: ("light": rgba(26,26,26,.8), "dark": white);
 $range-track-color: ("dark": black, "light":#ccc);
 $range-track-progress-color: ("dark": white, "light":#37adbf);
 $white: ("dark": white, "light":white);
@@ -68,56 +69,26 @@ $themes: dark light;
 
         button {
             height: 100%;
-            min-width: 30px;
-            min-height: 30px;
+            // min-width: 30px;
+            // min-height: 30px;
             padding: 6px;
-            border: 0;
+            border: none;
             margin: 0;
-            background-color: transparent;
-            @include imgBackGround;
-            background-origin: content-box;
-            background-clip: content-box;
+            fill: map-get($button-bgcolor, $theme );
+            background: transparent;
             border-radius: 5px;
             cursor: pointer;
             margin-right: 5px;
             box-sizing: border-box;
-            transition: all 1s ease;
+            transition: all 0.1s ease-in;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             &:hover {
-                border: 1px solid map-get($audio-duration, $theme);
+                background: map-get($primary, $theme );
+                fill: map-get($background-color, $theme )
             }
-        }
-
-        
-        .playButton {
-            background-image: url(chrome://global/skin/media/pauseButton.svg);
-            @include imgBackGround;
-        }
-
-        .playButton[paused] {
-            background-image: url(chrome://global/skin/media/playButton.svg);
-            @include imgBackGround;
-        }
-
-        .muteButton {
-            background-image: url(chrome://global/skin/media/audioUnmutedButton.svg);
-            @include imgBackGround;
-        }
-        .muteButton[muted] {
-            background-image: url(chrome://global/skin/media/audioMutedButton.svg);
-            @include imgBackGround;
-        }
-
-        .muteButton[noAudio],
-        .muteButton[noAudio]:hover,
-        .muteButton[noAudio]:hover:active {
-            background-image: url(chrome://global/skin/media/audioNoAudioButton.svg);
-            @include imgBackGround;
-            fill: white;
-        }
-
-        .muteButton[noAudio] + .volumeStack {
-            display: none;
         }
 
         .progress-bar {
@@ -277,7 +248,12 @@ $themes: dark light;
             padding-inline-start: 9px;
             padding-inline-end: 9px;
             white-space: nowrap;
+            pointer-events: none;
+            cursor: default;
             color: map-get($audio-duration, $theme );
+            font-size: 14px;
+            font-variant-numeric: normal;
+            text-shadow: none;
 
             .duration {
                 display: inline-block;
@@ -291,6 +267,16 @@ $themes: dark light;
             font-weight: bold;
             font-family: monospace;
             font-size: 17px;
+        }
+    }
+
+    svg {
+        pointer-events: none;
+        display: block;
+
+        &.icon {
+            width: 19px;
+            height: 19px;
         }
     }
 }
