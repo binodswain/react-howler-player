@@ -33,14 +33,15 @@ export default class PlayerComponent extends Component {
     toggleMute = () => {
         this.setState(prevState => {
             const {
-                volume
+                volume,
+                sound
             } = prevState;
 
             if (volume == 0 || !prevState.isMute) {
-                Howler.volume(0)
+                sound.mute(true)
                 return { isMute: true };    
             }
-            Howler.volume(Math.round(volume) / 100)
+            sound.mute(false)
             return { isMute: !prevState.isMute };
         });
     }
