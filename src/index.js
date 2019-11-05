@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 import PropTypes from 'prop-types';
 import Prepare from "./prepare";
 import './styles.scss';
@@ -49,7 +49,6 @@ export default class PlayerComponent extends Component {
     readyToPlay = () => {
         const { playerState, sound } = this.state;
         if (playerState === STATE.PLAYING) { return }
-        console.log("playback ready");
         this.setState({
             playerState: STATE.READY,
             duration: this.formatTime(Math.round(sound.duration()))
@@ -57,8 +56,6 @@ export default class PlayerComponent extends Component {
     }
 
     playbackEnded = () => {
-        console.log("playback ended");
-        
         this.setState({
             playerState: STATE.ENDED
         });
@@ -66,21 +63,17 @@ export default class PlayerComponent extends Component {
 
     playbackPlay = () => {
         const { sound } = this.state;
-        console.log("playback play");
         sound.play();
         this.setState({
-            playerState: STATE.PLAYING,
-            sound
+            playerState: STATE.PLAYING
         })
     }
 
     playbackPause = () => {
         const { sound } = this.state;
-        console.log("playback pause");
         sound.pause();
         this.setState({
-            playerState: STATE.PAUSE,
-            sound
+            playerState: STATE.PAUSE
         })
     }
 
@@ -137,13 +130,17 @@ export default class PlayerComponent extends Component {
 
     step = () => {
         // Get the Howl we want to manipulate.
-        const { sound } = this.state
+        let { sound, previouslyFocused } = this.state;
+        // previouslyFocused && previouslyFocused.focus();
 
         // Determine our current seek position.
         var seek = sound.seek() || 0;
 
         let percentage = (((seek / sound.duration()) * 100) || 0);
 
+        console.log(document.activeElement.id);
+        previouslyFocused = document.activeElement;
+        
         // progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
 
         // If the sound is still playing, continue stepping.
@@ -151,9 +148,11 @@ export default class PlayerComponent extends Component {
             this.setState({
                 progressValue: Math.round(percentage),
                 currentPos: this.formatTime(Math.round(seek)),
-                playerState: STATE.PLAYING
+                playerState: STATE.PLAYING,
+                previouslyFocused
             })
-            requestAnimationFrame(this.step);
+            // requestAnimationFrame(this.step);
+            setTimeout(this.step, 100);
         } else {
             this.setState({
                 progressValue: Math.round(percentage),
@@ -164,12 +163,22 @@ export default class PlayerComponent extends Component {
     }
 
     changeVolume = (volume) => {
-        Howler.volume(Math.round(volume) / 100)
+        this.state.sound.volume(Math.round(volume) / 100)
         
         this.setState({
             volume,
             isMute: volume==0
         })
+    }
+
+    keyPress = (event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+            return;
+        }
+
+        // const code = event.keyCode ? event.keyCode : event.which;
+        // console.log(code)
+        
     }
 
     render() {
@@ -198,7 +207,10 @@ export default class PlayerComponent extends Component {
             isDark ? "dark-themed" : "light-themed"
         ].join(" ");
 
-        return <div className={className}>
+        return <div className={className}
+            // onKeyPress={this.keyPress}
+            id="rh-player-main"
+        >
             <div hidden>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                     <symbol id="r-howl-airplay"><path d="M16 1H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3v-2H3V3h12v8h-2v2h3a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path><path d="M4 17h10l-5-6z"></path></symbol>
@@ -223,9 +235,9 @@ export default class PlayerComponent extends Component {
             <div className="player-controls">
                 {(playerState === STATE.READY || playerState === STATE.PAUSE) ? 
                     <button
-                        // paused="true"
-                        // className="playButton"
+                        aria-label="Play"
                         onClick={this.playbackPlay}
+                        id="rh-player-play"
                     >
                         <svg role="presentation" className="icon">
                             <use xlinkHref="#r-howl-play"></use>
@@ -236,8 +248,9 @@ export default class PlayerComponent extends Component {
                 
                 {playerState === STATE.PLAYING ? 
                     <button
-                        // className="playButton"
+                        aria-label="Pause"
                         onClick={this.playbackPause}
+                        id="rh-player-pause"
                     >
                         <svg role="presentation" className="icon">
                             <use xlinkHref="#r-howl-pause"></use>
@@ -245,13 +258,20 @@ export default class PlayerComponent extends Component {
                     </button>
                     : null
                 }
-
                 <div className="progress-bar">
                     <input type="range" 
+                        id="rh-player-media-progress"
                         className="player-progress" 
-                        min="0" max="100"
                         step="0.01"
+                        min="0" max="100"
                         value={progressValue}
+                        aria-valuemin="0" aria-valuemax="100"
+                        aria-valuenow={progressValue}
+                        aria-valuetext={`${currentPos} of ${duration}, ${progressValue} percentage complete`}
+                        role="slider"
+                        style={{
+                            '--progress-value' : `${progressValue}%`
+                        }}
                         autoComplete="off"
                         onChange={this.seek}
                     />
@@ -261,16 +281,30 @@ export default class PlayerComponent extends Component {
                     {currentPos} <span className="duration">/ {duration || '...'}</span>
                 </div>
                 <div className="volume-control">
-                    <button onClick={this.toggleMute}>
+                    <button onClick={this.toggleMute}
+                        id="rh-player-volume"
+                        aria-label={isMute ? 'Unmute' : 'Mute'}>
                         <svg role="presentation" className="icon">
                             <use xlinkHref={isMute ? "#r-howl-muted": "#r-howl-volume"}></use>
                         </svg>
                     </button>
-                    <input type="range" min="0" max="100"
-                        step="0.01" className="audio-bar" name="" id="" value={isMute ? 0 : volume} onChange={(e) => {
-                        this.changeVolume(e.target.value)
-                    }}/>
-                    
+                    <input type="range"
+                        id="rh-player-volume-slider"
+                        className="audio-bar"
+                        style={{
+                            '--progress-value' : `${isMute ? 0 : volume}%`
+                        }}
+                        min="0" max="100" step="0.01"
+                        value={isMute ? 0 : volume}
+                        aria-valuemin="0" aria-valuemax="100"
+                        aria-valuenow={isMute ? 0 : volume}
+                        role="slider"
+                        aria-label="volume"
+                        aria-valuetext={isMute ? 'Muted' : `${volume}%`}
+                        onChange={(e) => {
+                            this.changeVolume(e.target.value)
+                        }}
+                    />
                 </div>
             </div>
         </div>

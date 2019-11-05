@@ -132,7 +132,7 @@ $themes: dark light;
             height: 4px;
             border-radius: 4px;
             min-width: 50px;
-            background: transparent;
+            // background: transparent;
             z-index: 2;
 
             &::-moz-range-thumb {
@@ -154,14 +154,14 @@ $themes: dark light;
             }
 
             &:focus {
-                outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+                // outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
             }
 
             // Track
             &::-webkit-slider-runnable-track {
                 @include rangeTrack;
-                background: map-get($range-track-color, $theme);
-                content: '';
+                background: linear-gradient(to right, map-get($range-track-progress-color, $theme), map-get($range-track-progress-color, $theme) var(--progress-value, 0), map-get($range-track-color, $theme) var(--progress-value, 0));
+                content: ""
                 // margin-top: -6px;
             }
 
@@ -216,13 +216,13 @@ $themes: dark light;
                 }
 
                 &:focus {
-                outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+                // outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
                 }
 
                 // Track
                 &::-webkit-slider-runnable-track {
                     @include rangeTrack;
-                    background: map-get($range-track-color, $theme);
+                    background: linear-gradient(to right, map-get($range-track-progress-color, $theme), map-get($range-track-progress-color, $theme) var(--progress-value, 0), map-get($range-track-color, $theme) var(--progress-value, 0));
                     content: '';
                 }
 
@@ -262,6 +262,9 @@ $themes: dark light;
             }
         }
 
+        input[type=range]:focus {
+            
+        }
         .prepare {
             color: map-get($secondary, $theme);
             font-weight: bold;
