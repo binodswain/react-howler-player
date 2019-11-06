@@ -28,5 +28,11 @@
         }
     },
     "rules": {
+        "quotes": ["error", "double"],
+        "indent": ["error", 4],
+        "semi": ["error", "always"],
+        "no-console": 1,
+        "no-irregular-whitespace": "off",
+        "no-case-declarations": "off"
     }
 }

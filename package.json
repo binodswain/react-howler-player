@@ -2,7 +2,7 @@
   "name": "react-howler-player",
   "version": "1.0.0",
   "main": "build/index.js",
-  "description": "React package to display audio player adding wrapper on howler.js",
+  "description": "React package to display minimalist audio player UI adding wrapper on howler.js",
   "scripts": {
     "start": "webpack --mode production --watch",
     "lint:js": "eslint src/*.js",
@@ -51,9 +51,11 @@
     "react",
     "audio",
     "player",
-    "web"
+    "web",
+    "media",
+    "howlerjs"
   ],
-  "author": "“Binod <binodkumarswain94@gmail.com> (binodswain@github.io)",
+  "author": "“Binod Swain<binodkumarswain94@gmail.com> (binodswain.github.io)",
   "license": "MIT",
   "dependencies": {
     "howler": "^2.1.2"

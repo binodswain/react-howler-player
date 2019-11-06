@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Prepare extends Component {
     static propTypes = {
@@ -9,8 +9,9 @@ export default class Prepare extends Component {
 
     render() {
         const {
-            loadingText = 'Preparing'
-        } = this.props
+            loadingText = "Preparing"
+        } = this.props;
+
         let className = [
             "player", "r-howler",
             this.props.isDark ? "dark-themed" : "light-themed"
@@ -22,6 +23,6 @@ export default class Prepare extends Component {
                     {loadingText}
                 </div>
             </div>
-        )
+        );
     }
 }

@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import {Howl} from 'howler';
-import PropTypes from 'prop-types';
-import Prepare from "./prepare";
-import './styles.scss';
+import React, { Component } from "react";
+import { Howl } from "howler";
+import PropTypes from "prop-types"; 
+import Prepare from "./prepare"; 
+import keyboardEvents from "./events";
+import "./styles.scss";
 
 const STATE = {
-    PREPARE: 'PREPARE',
-    READY: 'READY',
-    ENDED: 'ENDED',
-    PAUSE: 'PAUSE',
-    PLAYING: 'PLAYING',
-}
+    PREPARE: "PREPARE",
+    READY: "READY",
+    ENDED: "ENDED",
+    PAUSE: "PAUSE",
+    PLAYING: "PLAYING",
+};
 
 export default class PlayerComponent extends Component {
     
@@ -25,7 +26,7 @@ export default class PlayerComponent extends Component {
         playerState: STATE.PREPARE,
         src: [],
         progressValue: 0,
-        currentPos: '0:00',
+        currentPos: "0:00",
         volume: 70,
         isMute: false
     }
@@ -38,17 +39,17 @@ export default class PlayerComponent extends Component {
             } = prevState;
 
             if (volume == 0 || !prevState.isMute) {
-                sound.mute(true)
+                sound.mute(true);
                 return { isMute: true };    
             }
-            sound.mute(false)
+            sound.mute(false);
             return { isMute: !prevState.isMute };
         });
     }
 
     readyToPlay = () => {
         const { playerState, sound } = this.state;
-        if (playerState === STATE.PLAYING) { return }
+        if (playerState === STATE.PLAYING) { return; }
         this.setState({
             playerState: STATE.READY,
             duration: this.formatTime(Math.round(sound.duration()))
@@ -66,7 +67,7 @@ export default class PlayerComponent extends Component {
         sound.play();
         this.setState({
             playerState: STATE.PLAYING
-        })
+        });
     }
 
     playbackPause = () => {
@@ -74,7 +75,7 @@ export default class PlayerComponent extends Component {
         sound.pause();
         this.setState({
             playerState: STATE.PAUSE
-        })
+        });
     }
 
     componentDidMount() {
@@ -88,15 +89,15 @@ export default class PlayerComponent extends Component {
             src
         });
         // Clear listener after first call.
-        sound.once('load', this.readyToPlay);
+        sound.once("load", this.readyToPlay);
 
-        sound.on('end', this.playbackEnded);
+        sound.on("end", this.playbackEnded);
 
-        sound.on('play', this.step);
+        sound.on("play", this.step);
 
         this.setState({
             sound
-        })
+        });
     }
 
     /**
@@ -108,7 +109,7 @@ export default class PlayerComponent extends Component {
         var minutes = Math.floor(secs / 60) || 0;
         var seconds = (secs - minutes * 60) || 0;
 
-        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     }
 
     /**
@@ -122,35 +123,29 @@ export default class PlayerComponent extends Component {
         let seek = sound.seek() || 0;
         let percentage = (((seek / sound.duration()) * 100) || 0);
         this.setState({
-            sound,
             progressValue: Math.round(percentage),
             currentPos: this.formatTime(Math.round(seek)),
-        })
+        });
     }
 
     step = () => {
         // Get the Howl we want to manipulate.
-        let { sound, previouslyFocused } = this.state;
-        // previouslyFocused && previouslyFocused.focus();
+        let { sound } = this.state;
 
         // Determine our current seek position.
         var seek = sound.seek() || 0;
 
         let percentage = (((seek / sound.duration()) * 100) || 0);
 
-        console.log(document.activeElement.id);
-        previouslyFocused = document.activeElement;
-        
-        // progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
+        // progress.style.width = (((seek / sound.duration()) * 100) || 0) + "%";
 
         // If the sound is still playing, continue stepping.
         if (sound.playing()) {
             this.setState({
                 progressValue: Math.round(percentage),
                 currentPos: this.formatTime(Math.round(seek)),
-                playerState: STATE.PLAYING,
-                previouslyFocused
-            })
+                playerState: STATE.PLAYING
+            });
             // requestAnimationFrame(this.step);
             setTimeout(this.step, 100);
         } else {
@@ -158,27 +153,133 @@ export default class PlayerComponent extends Component {
                 progressValue: Math.round(percentage),
                 currentPos: this.formatTime(Math.round(seek)),
                 playerState: STATE.PAUSE
-            })
+            });
         }
     }
 
     changeVolume = (volume) => {
-        this.state.sound.volume(Math.round(volume) / 100)
+        this.state.sound.volume(Math.round(volume) / 100);
         
         this.setState({
             volume,
-            isMute: volume==0
-        })
+            isMute: volume === 0
+        });
     }
 
-    keyPress = (event) => {
-        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+    volumeUp = () => {
+        this.setState(prevState => {
+            let volume = prevState.volume;
+            volume += 5;
+            if (volume > 100) {
+                volume = 100;
+            }
+            this.state.sound.volume(Math.round(volume) / 100);
+            return { volume };
+        });
+    }
+
+    volumeDown = () => {
+        this.setState(prevState => {
+            let volume = prevState.volume;
+            volume -= 5;
+            if (volume < 0) {
+                volume = 0;
+            }
+            this.state.sound.volume(Math.round(volume) / 100);
+            return { volume };
+        });
+    }
+
+    seekForward = () => {
+        const { sound } = this.state;
+        let currentPos = sound.seek();
+        let duration = sound.duration();
+        let forward = duration / 20 < 10 ? 10 : duration / 20;
+        if (currentPos + forward > duration) {
             return;
         }
 
-        // const code = event.keyCode ? event.keyCode : event.which;
-        // console.log(code)
-        
+        if ((duration - currentPos) < forward && forward > 50) {
+            forward = 10;
+        }
+        sound.seek(currentPos+forward);
+        // let seek = sound.seek() || 0;
+        let percentage = ((((currentPos+forward) / sound.duration()) * 100) || 0);
+        this.setState({
+            progressValue: Math.round(percentage),
+            currentPos: this.formatTime(Math.round(currentPos + forward))
+        });
+    }
+
+    seekBackward = () => {
+        const { sound } = this.state;
+        let currentPos = sound.seek();
+        let duration = sound.duration();
+        let backward = duration / 20 < 10 ? 10 : duration / 20;
+        if (currentPos - backward < 0) {
+            return;
+        }
+
+        if (currentPos < backward && backward > 50) {
+            backward = 10;
+        }
+        sound.seek(currentPos-backward);
+        // let seek = sound.seek() || 0;
+        let percentage = ((((currentPos-backward) / sound.duration()) * 100) || 0);
+        this.setState({
+            progressValue: Math.round(percentage),
+            currentPos: this.formatTime(Math.round(currentPos - backward)),
+        });
+    }
+
+    keyPress = (event) => {
+        const { sound, playerState, isMute } = this.state;
+        const code = event.keyCode ? event.keyCode : event.which;
+
+        if (keyboardEvents.keyCodes[code] === "tab") {
+            return;
+        }
+        
+        event.preventDefault();
+        event.stopPropagation();
+
+        switch (keyboardEvents.keyCodes[code]) {
+        case "space":
+        case "return":
+            let focusedEle = document.activeElement;
+            if (focusedEle.name ==="volume") {
+                if (isMute) { sound.mute(false); }
+                else { sound.mute(true); }
+                this.setState({ isMute: !this.state.isMute });
+                break;
+            }
+            if (playerState === STATE.PLAYING) { sound.pause(); }
+            else if (playerState === STATE.READY || playerState === STATE.PAUSE) {
+                sound.play();
+            }
+            break;
+        case "m":
+            if (isMute) { sound.mute(false); }
+            else { sound.mute(true); }
+            this.setState({ isMute: !this.state.isMute });
+            break;
+        case "arrowUp":
+            this.volumeUp();
+            break;
+        case "arrowDown":
+            this.volumeDown();
+            break;
+        case "arrowRight":
+            this.seekForward();
+            break;
+        case "arrowLeft":
+            this.seekBackward();
+            break;
+        case "tab":
+            break;
+        default:
+            break;
+        }
     }
 
     render() {
@@ -199,16 +300,32 @@ export default class PlayerComponent extends Component {
         if (playerState === STATE.PREPARE) {
             return <Prepare
                 isDark={isDark}
-                loadingText={loadingText} />
+                loadingText={loadingText} />;
         }
 
         let className = [
             "player", "r-howler",
             isDark ? "dark-themed" : "light-themed"
         ].join(" ");
+        let btnFunction = undefined;
+        let btnAttrs = {};
+
+        if (playerState === STATE.READY || playerState === STATE.PAUSE) {
+            btnFunction = this.playbackPlay;
+            btnAttrs = {
+                "aria-label": "Play", "id": "rh-player-play"
+            };
+        } else if (playerState === STATE.PLAYING) {
+            btnFunction = this.playbackPause;
+            btnAttrs = {
+                "aria-label": "Pause", "id": "rh-player-pause"
+            };
+        }
 
         return <div className={className}
             // onKeyPress={this.keyPress}
+            onKeyPress={(e) => this.keyPress(e)}
+            onKeyDown={(e) => this.keyPress(e)}
             id="rh-player-main"
         >
             <div hidden>
@@ -233,35 +350,16 @@ export default class PlayerComponent extends Component {
                 </svg>
             </div>
             <div className="player-controls">
-                {(playerState === STATE.READY || playerState === STATE.PAUSE) ? 
-                    <button
-                        aria-label="Play"
-                        onClick={this.playbackPlay}
-                        id="rh-player-play"
-                    >
-                        <svg role="presentation" className="icon">
-                            <use xlinkHref="#r-howl-play"></use>
-                        </svg>
-                    </button>
-                        : null
-                }
-                
-                {playerState === STATE.PLAYING ? 
-                    <button
-                        aria-label="Pause"
-                        onClick={this.playbackPause}
-                        id="rh-player-pause"
-                    >
-                        <svg role="presentation" className="icon">
-                            <use xlinkHref="#r-howl-pause"></use>
-                        </svg>
-                    </button>
-                    : null
-                }
+                <button {...btnAttrs} onClick={btnFunction}>
+                    <svg role="presentation" className="icon">
+                        <use xlinkHref={playerState === STATE.PLAYING ? "#r-howl-pause" : "#r-howl-play"}>
+                        </use>
+                    </svg>
+                </button>
                 <div className="progress-bar">
-                    <input type="range" 
+                    <input type="range"
                         id="rh-player-media-progress"
-                        className="player-progress" 
+                        className="player-progress"
                         step="0.01"
                         min="0" max="100"
                         value={progressValue}
@@ -270,7 +368,7 @@ export default class PlayerComponent extends Component {
                         aria-valuetext={`${currentPos} of ${duration}, ${progressValue} percentage complete`}
                         role="slider"
                         style={{
-                            '--progress-value' : `${progressValue}%`
+                            "--progress-value": `${progressValue}%`
                         }}
                         autoComplete="off"
                         onChange={this.seek}
@@ -278,21 +376,22 @@ export default class PlayerComponent extends Component {
                     
                 </div>
                 <div className="audio-duration">
-                    {currentPos} <span className="duration">/ {duration || '...'}</span>
+                    {currentPos} <span className="duration">/ {duration || "..."}</span>
                 </div>
                 <div className="volume-control">
                     <button onClick={this.toggleMute}
                         id="rh-player-volume"
-                        aria-label={isMute ? 'Unmute' : 'Mute'}>
+                        name="volume"
+                        aria-label={isMute ? "Unmute" : "Mute"}>
                         <svg role="presentation" className="icon">
-                            <use xlinkHref={isMute ? "#r-howl-muted": "#r-howl-volume"}></use>
+                            <use xlinkHref={isMute ? "#r-howl-muted" : "#r-howl-volume"}></use>
                         </svg>
                     </button>
                     <input type="range"
                         id="rh-player-volume-slider"
                         className="audio-bar"
                         style={{
-                            '--progress-value' : `${isMute ? 0 : volume}%`
+                            "--progress-value": `${isMute ? 0 : volume}%`
                         }}
                         min="0" max="100" step="0.01"
                         value={isMute ? 0 : volume}
@@ -300,13 +399,13 @@ export default class PlayerComponent extends Component {
                         aria-valuenow={isMute ? 0 : volume}
                         role="slider"
                         aria-label="volume"
-                        aria-valuetext={isMute ? 'Muted' : `${volume}%`}
+                        aria-valuetext={isMute ? "Muted" : `${volume}%`}
                         onChange={(e) => {
-                            this.changeVolume(e.target.value)
+                            this.changeVolume(e.target.value);
                         }}
                     />
                 </div>
             </div>
-        </div>
+        </div>;
     }
 }
