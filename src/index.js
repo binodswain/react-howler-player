@@ -88,7 +88,7 @@ export default class PlayerComponent extends Component {
         let sound = new Howl({
             src
         });
-        // Clear listener after first call.
+
         sound.once("load", this.readyToPlay);
 
         sound.on("end", this.playbackEnded);
@@ -129,15 +129,11 @@ export default class PlayerComponent extends Component {
     }
 
     step = () => {
-        // Get the Howl we want to manipulate.
         let { sound } = this.state;
 
-        // Determine our current seek position.
         var seek = sound.seek() || 0;
 
         let percentage = (((seek / sound.duration()) * 100) || 0);
-
-        // progress.style.width = (((seek / sound.duration()) * 100) || 0) + "%";
 
         // If the sound is still playing, continue stepping.
         if (sound.playing()) {
@@ -146,7 +142,6 @@ export default class PlayerComponent extends Component {
                 currentPos: this.formatTime(Math.round(seek)),
                 playerState: STATE.PLAYING
             });
-            // requestAnimationFrame(this.step);
             setTimeout(this.step, 100);
         } else {
             this.setState({
@@ -203,7 +198,6 @@ export default class PlayerComponent extends Component {
             forward = 10;
         }
         sound.seek(currentPos+forward);
-        // let seek = sound.seek() || 0;
         let percentage = ((((currentPos+forward) / sound.duration()) * 100) || 0);
         this.setState({
             progressValue: Math.round(percentage),
@@ -224,7 +218,7 @@ export default class PlayerComponent extends Component {
             backward = 10;
         }
         sound.seek(currentPos-backward);
-        // let seek = sound.seek() || 0;
+        
         let percentage = ((((currentPos-backward) / sound.duration()) * 100) || 0);
         this.setState({
             progressValue: Math.round(percentage),
@@ -323,7 +317,6 @@ export default class PlayerComponent extends Component {
         }
 
         return <div className={className}
-            // onKeyPress={this.keyPress}
             onKeyPress={(e) => this.keyPress(e)}
             onKeyDown={(e) => this.keyPress(e)}
             id="rh-player-main"
