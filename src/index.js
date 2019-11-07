@@ -16,7 +16,8 @@ const STATE = {
 export default class PlayerComponent extends Component {
     
     static propTypes = {
-        src: PropTypes.string,
+        src: PropTypes.string.isRequired,
+        format: PropTypes.array,
         loadingText: PropTypes.string,
         isDark: PropTypes.bool
     };
@@ -80,13 +81,16 @@ export default class PlayerComponent extends Component {
 
     componentDidMount() {
         const {
-            src
+            src,
+            format = ["wav","mp3", "flac", "aac"]
         } = this.props;
         if (!src) {
             return;
         }
         let sound = new Howl({
-            src
+            src,
+            format,
+            html5: true
         });
 
         sound.once("load", this.readyToPlay);
@@ -343,7 +347,9 @@ export default class PlayerComponent extends Component {
                 </svg>
             </div>
             <div className="player-controls">
-                <button {...btnAttrs} onClick={btnFunction}>
+                <button
+                    type="button"
+                    {...btnAttrs} onClick={btnFunction}>
                     <svg role="presentation" className="icon">
                         <use xlinkHref={playerState === STATE.PLAYING ? "#r-howl-pause" : "#r-howl-play"}>
                         </use>
@@ -372,7 +378,9 @@ export default class PlayerComponent extends Component {
                     {currentPos} <span className="duration">/ {duration || "..."}</span>
                 </div>
                 <div className="volume-control">
-                    <button onClick={this.toggleMute}
+                    <button
+                        type="button"
+                        onClick={this.toggleMute}
                         id="rh-player-volume"
                         name="volume"
                         aria-label={isMute ? "Unmute" : "Mute"}>
