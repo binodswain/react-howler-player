@@ -13,35 +13,39 @@ export default class App extends Component {
             name
         } = event.target.files[0];
 
-        console.log("file name : ", name);
-        
         this.setState((prevState, props) => ({
             file_path,
             type,
             name
         }));
     }
-  
-  render() {
-    const {file_path} = this.state
-    return (
-        <div>
-            <input type="file" className="file-input" id="file-input" name="audio_file" accept="audio/*" onChange={(e)=>this.onChange(e)} />
-            <div className="playerlist">
-                <Player
-                    src={[
-                        'https://testbucket1mmmm.s3.ap-south-1.amazonaws.com/TULSI+2020+For+The+Country+We+Love+-+Tulsi+Gabbard.mp3'
-                    ]}    
-                />
-            
-                {file_path ? 
+
+    timeUpdate = (attrs) => {
+        console.log(attrs);
+    }
+
+    render() {
+        const {file_path} = this.state
+        return (
+            <div>
+                <input type="file" className="file-input" id="file-input" name="audio_file" accept="audio/*" onChange={(e)=>this.onChange(e)} />
+                <div className="playerlist">
                     <Player
-                        src={[file_path]}
-                        format={['wav','mp3']}
-                    /> : null
-                }
+                        src={[
+                            'https://testbucket1mmmm.s3.ap-south-1.amazonaws.com/TULSI+2020+For+The+Country+We+Love+-+Tulsi+Gabbard.mp3'
+                        ]}   
+                        onTimeUpdate={this.timeUpdate}
+                    />
+                
+                    {file_path ? 
+                        <Player
+                            src={[file_path]}
+                            format={['wav', 'mp3']}
+                            onTimeUpdate={this.timeUpdate}
+                        /> : null
+                    }
+                </div>
             </div>
-        </div>
-    )
-  }
+        )
+    }
 }

@@ -19,7 +19,8 @@ export default class PlayerComponent extends Component {
         src: PropTypes.string.isRequired,
         format: PropTypes.array,
         loadingText: PropTypes.string,
-        isDark: PropTypes.bool
+        isDark: PropTypes.bool,
+        onTimeUpdate: PropTypes.func
     };
 
     state = {
@@ -58,6 +59,14 @@ export default class PlayerComponent extends Component {
     }
 
     playbackEnded = () => {
+        const { onTimeUpdate } = this.props;
+        if (onTimeUpdate) {
+            let playerState = {
+                currentTime: this.state.sound.duration(),
+                progressPercent: 100
+            };
+            onTimeUpdate(playerState);
+        }
         this.setState({
             playerState: STATE.ENDED
         });
@@ -134,6 +143,7 @@ export default class PlayerComponent extends Component {
 
     step = () => {
         let { sound } = this.state;
+        const { onTimeUpdate } = this.props;
 
         var seek = sound.seek() || 0;
 
@@ -146,7 +156,16 @@ export default class PlayerComponent extends Component {
                 currentPos: this.formatTime(Math.round(seek)),
                 playerState: STATE.PLAYING
             });
-            setTimeout(this.step, 100);
+            setTimeout(this.step, 15);
+            
+            if (onTimeUpdate) {
+                let playerState = {
+                    currentTime: seek,
+                    progressPercent: Number(percentage.toFixed(3))
+                };
+                onTimeUpdate(playerState);
+            }
+            
         } else {
             this.setState({
                 progressValue: Math.round(percentage),
