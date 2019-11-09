@@ -1,6 +1,6 @@
 {
   "name": "react-howler-player",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "build/index.js",
   "description": "React package to display minimalist audio player UI adding wrapper on howler.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:binodswain/react-howler-player.git"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
