@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Howl } from "howler";
 import PropTypes from "prop-types"; 
+import { isEqual } from "lodash";
 import Prepare from "./prepare"; 
 import keyboardEvents from "./events";
 import "./styles.scss";
@@ -33,6 +34,8 @@ export default class PlayerComponent extends Component {
         isMute: false
     }
 
+    stepInterval = null;
+
     toggleMute = () => {
         this.setState(prevState => {
             const {
@@ -58,6 +61,38 @@ export default class PlayerComponent extends Component {
         });
     }
 
+    setupPlayer = () => {
+        this.destroySound();
+        const {
+            src,
+            format = ["wav","mp3", "flac", "aac"]
+        } = this.props;
+
+        if (!src) {
+            return;
+        }
+        let sound = new Howl({
+            src,
+            format,
+            html5: true
+        });
+
+        sound.once("load", this.readyToPlay);
+
+        sound.on("end", this.playbackEnded);
+
+        sound.on("play", () => {
+            this.stepInterval = setInterval(this.step, 15);
+        });
+
+        this.setState({
+            sound,
+            playerState: STATE.PREPARE,
+            progressValue: 0,
+            currentPos: "0:00"
+        });
+    }
+
     playbackEnded = () => {
         const { onTimeUpdate } = this.props;
         if (onTimeUpdate) {
@@ -67,6 +102,7 @@ export default class PlayerComponent extends Component {
             };
             onTimeUpdate(playerState);
         }
+        clearInterval(this.stepInterval);
         this.setState({
             playerState: STATE.ENDED
         });
@@ -83,34 +119,14 @@ export default class PlayerComponent extends Component {
     playbackPause = () => {
         const { sound } = this.state;
         sound.pause();
+        clearInterval(this.stepInterval);
         this.setState({
             playerState: STATE.PAUSE
         });
     }
 
     componentDidMount() {
-        const {
-            src,
-            format = ["wav","mp3", "flac", "aac"]
-        } = this.props;
-        if (!src) {
-            return;
-        }
-        let sound = new Howl({
-            src,
-            format,
-            html5: true
-        });
-
-        sound.once("load", this.readyToPlay);
-
-        sound.on("end", this.playbackEnded);
-
-        sound.on("play", this.step);
-
-        this.setState({
-            sound
-        });
+        this.setupPlayer();
     }
 
     /**
@@ -156,8 +172,6 @@ export default class PlayerComponent extends Component {
                 currentPos: this.formatTime(Math.round(seek)),
                 playerState: STATE.PLAYING
             });
-            setTimeout(this.step, 15);
-            
             if (onTimeUpdate) {
                 let playerState = {
                     currentTime: seek,
@@ -165,13 +179,6 @@ export default class PlayerComponent extends Component {
                 };
                 onTimeUpdate(playerState);
             }
-            
-        } else {
-            this.setState({
-                progressValue: Math.round(percentage),
-                currentPos: this.formatTime(Math.round(seek)),
-                playerState: STATE.PAUSE
-            });
         }
     }
 
@@ -199,12 +206,17 @@ export default class PlayerComponent extends Component {
     volumeDown = () => {
         this.setState(prevState => {
             let volume = prevState.volume;
+            let isMute = prevState.isMute;
             volume -= 5;
             if (volume < 0) {
                 volume = 0;
+                isMute = true;
             }
             this.state.sound.volume(Math.round(volume) / 100);
-            return { volume };
+            return {
+                volume,
+                isMute
+            };
         });
     }
 
@@ -270,9 +282,16 @@ export default class PlayerComponent extends Component {
                 this.setState({ isMute: !this.state.isMute });
                 break;
             }
-            if (playerState === STATE.PLAYING) { sound.pause(); }
-            else if (playerState === STATE.READY || playerState === STATE.PAUSE) {
+            if (playerState === STATE.PLAYING) {
+                sound.pause();
+                this.setState({ playerState: STATE.PAUSE });
+            }
+            else if (
+                playerState === STATE.READY ||
+                playerState === STATE.PAUSE ||
+                playerState === STATE.ENDED) {
                 sound.play();
+                this.setState({ playerState: STATE.PLAYING });
             }
             break;
         case "m":
@@ -296,6 +315,29 @@ export default class PlayerComponent extends Component {
             break;
         default:
             break;
+        }
+    }
+
+    componentWillUnmount () {
+        this.destroySound();
+    }
+
+    destroySound = () => {
+        const { sound } = this.state;
+        clearInterval(this.stepInterval);
+        if (sound) {
+            sound.off();
+            sound.stop();
+        }
+    }
+
+    UNSAFE_componentWillReceiveProps (props) {
+        const {
+            src
+        } = this.state;
+
+        if (!isEqual(src, props.src)) {
+            this.setupPlayer();
         }
     }
 
@@ -327,7 +369,10 @@ export default class PlayerComponent extends Component {
         let btnFunction = undefined;
         let btnAttrs = {};
 
-        if (playerState === STATE.READY || playerState === STATE.PAUSE) {
+        if (playerState === STATE.READY
+            || playerState === STATE.PAUSE
+            || playerState === STATE.ENDED
+        ) {
             btnFunction = this.playbackPlay;
             btnAttrs = {
                 "aria-label": "Play", "id": "rh-player-play"
