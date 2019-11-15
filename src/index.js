@@ -199,7 +199,7 @@ export default class PlayerComponent extends Component {
                 volume = 100;
             }
             this.state.sound.volume(Math.round(volume) / 100);
-            return { volume };
+            return { volume, isMute: false };
         });
     }
 
