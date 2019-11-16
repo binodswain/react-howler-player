@@ -54,7 +54,7 @@ $themes: dark light;
             align-items: center;
             overflow: hidden;
             height: 45px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.6);
+            box-shadow: 0 0 2px rgba(0,0,0,0.6);
             background-color: map-get($background-color, $theme);
             border-radius: 4px;
         }

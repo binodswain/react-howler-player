@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Howl } from "howler";
-import PropTypes from "prop-types"; 
-import { isEqual } from "lodash";
+import PropTypes from "prop-types";
+import { isEqual } from "./func";
 import Prepare from "./prepare"; 
 import keyboardEvents from "./events";
 import "./styles.scss";
