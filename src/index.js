@@ -89,7 +89,8 @@ export default class PlayerComponent extends Component {
             sound,
             playerState: STATE.PREPARE,
             progressValue: 0,
-            currentPos: "0:00"
+            currentPos: "0:00",
+            src
         });
     }
 
