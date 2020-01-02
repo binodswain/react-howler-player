@@ -1,7 +1,16 @@
-import ExampleComponent from '../src'
+import React from 'react';
+import Player from '../';
+import TestRenderer from 'react-test-renderer';
 
-describe('ExampleComponent', () => {
+describe('React howler player', () => {
+  let data = {
+    src: ''
+  }
+  const testRenderer = TestRenderer.create(
+    <Player {...data}/>
+  );
+
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Player).toBeTruthy()
   })
 })
