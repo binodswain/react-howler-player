@@ -6,10 +6,17 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
+    "prosemirror-commands": "^1.0.8",
+    "prosemirror-example-setup": "^1.0.1",
+    "prosemirror-model": "^1.7.5",
+    "prosemirror-schema-basic": "^1.0.1",
+    "prosemirror-schema-list": "^1.0.4",
+    "prosemirror-state": "^1.2.4",
+    "prosemirror-view": "^1.12.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "react-howler-player": "file:.."
+    "react-howler-player": "file:..",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

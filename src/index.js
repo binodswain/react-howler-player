@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { isEqual } from "./func";
 import Prepare from "./prepare"; 
 import keyboardEvents from "./events";
-import "./styles.scss";
+import style from "./styles.scss";
 
 const STATE = {
     PREPARE: "PREPARE",
@@ -15,23 +15,17 @@ const STATE = {
 };
 
 export default class PlayerComponent extends Component {
-    
-    static propTypes = {
-        src: PropTypes.string.isRequired,
-        format: PropTypes.array,
-        loadingText: PropTypes.string,
-        isDark: PropTypes.bool,
-        onTimeUpdate: PropTypes.func
-    };
-
-    state = {
-        sound: null,
-        playerState: STATE.PREPARE,
-        src: [],
-        progressValue: 0,
-        currentPos: "0:00",
-        volume: 70,
-        isMute: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            sound: null,
+            playerState: STATE.PREPARE,
+            src: [],
+            progressValue: 0,
+            currentPos: "0:00",
+            volume: 70,
+            isMute: false
+        };
     }
 
     stepInterval = null;
@@ -364,8 +358,8 @@ export default class PlayerComponent extends Component {
         }
 
         let className = [
-            "player", "r-howler",
-            isDark ? "dark-themed" : "light-themed"
+            style["player"], style["r-howler"],
+            style[isDark ? "dark-themed" : "light-themed"]
         ].join(" ");
         let btnFunction = undefined;
         let btnAttrs = {};
@@ -411,19 +405,19 @@ export default class PlayerComponent extends Component {
                     <symbol id="r-howl-volume"><path d="M15.6 3.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4C15.4 5.9 16 7.4 16 9c0 1.6-.6 3.1-1.8 4.3-.4.4-.4 1 0 1.4.2.2.5.3.7.3.3 0 .5-.1.7-.3C17.1 13.2 18 11.2 18 9s-.9-4.2-2.4-5.7z"></path><path d="M11.282 5.282a.909.909 0 0 0 0 1.316c.735.735.995 1.458.995 2.402 0 .936-.425 1.917-.995 2.487a.909.909 0 0 0 0 1.316c.145.145.636.262 1.018.156a.725.725 0 0 0 .298-.156C13.773 11.733 14.13 10.16 14.13 9c0-.17-.002-.34-.011-.51-.053-.992-.319-2.005-1.522-3.208a.909.909 0 0 0-1.316 0zm-7.496.726H.714C.286 6.008 0 6.31 0 6.76v4.512c0 .452.286.752.714.752h3.072l4.071 3.858c.5.3 1.143 0 1.143-.602V2.752c0-.601-.643-.977-1.143-.601L3.786 6.008z"></path></symbol>
                 </svg>
             </div>
-            <div className="player-controls">
+            <div className={style["player-controls"]}>
                 <button
                     type="button"
                     {...btnAttrs} onClick={btnFunction}>
-                    <svg role="presentation" className="icon">
+                    <svg role="presentation" className={style["icon"]}>
                         <use xlinkHref={playerState === STATE.PLAYING ? "#r-howl-pause" : "#r-howl-play"}>
                         </use>
                     </svg>
                 </button>
-                <div className="progress-bar">
+                <div className={style["progress-bar"]}>
                     <input type="range"
                         id="rh-player-media-progress"
-                        className="player-progress"
+                        className={style["player-progress"]}
                         step="0.01"
                         min="0" max="100"
                         value={progressValue}
@@ -439,23 +433,23 @@ export default class PlayerComponent extends Component {
                     />
                     
                 </div>
-                <div className="audio-duration">
-                    {currentPos} <span className="duration">/ {duration || "..."}</span>
+                <div className={style["audio-duration"]}>
+                    {currentPos} <span className={style["duration"]}>/ {duration || "..."}</span>
                 </div>
-                <div className="volume-control">
+                <div className={style["volume-control"]}>
                     <button
                         type="button"
                         onClick={this.toggleMute}
                         id="rh-player-volume"
                         name="volume"
                         aria-label={isMute ? "Unmute" : "Mute"}>
-                        <svg role="presentation" className="icon">
+                        <svg role="presentation" className={style["icon"]}>
                             <use xlinkHref={isMute ? "#r-howl-muted" : "#r-howl-volume"}></use>
                         </svg>
                     </button>
                     <input type="range"
                         id="rh-player-volume-slider"
-                        className="audio-bar"
+                        className={style["audio-bar"]}
                         style={{
                             "--progress-value": `${isMute ? 0 : volume}%`
                         }}
@@ -475,3 +469,11 @@ export default class PlayerComponent extends Component {
         </div>;
     }
 }
+
+PlayerComponent.propTypes = {
+    src: PropTypes.string.isRequired,
+    format: PropTypes.array,
+    loadingText: PropTypes.string,
+    isDark: PropTypes.bool,
+    onTimeUpdate: PropTypes.func
+};

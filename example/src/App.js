@@ -35,19 +35,31 @@ export default class App extends PureComponent {
         })
     }
 
+    change = (e) => {
+        console.log(e.target);
+        const {
+            name, value
+        } = e.target;
+        this.setState({[name]: value})
+    }
+
     render() {
         const { file_path, name } = this.state;
         return (
             <div>
+                
                 <div className="playerlist">
                     <h3>Audio from remote url</h3>
+                    <h5><a href="http://https://librivox.org/pride-and-prejudice-by-jane-austen-solo-project/" target="_blank" rel="noopener noreferrer"> Pride and Prejudice (version 2)</a></h5>
                     <Player
-                        src={[
-                            'https://testbucket1mmmm.s3.ap-south-1.amazonaws.com/TULSI+2020+For+The+Country+We+Love+-+Tulsi+Gabbard.mp3'
-                        ]}   
-                        onTimeUpdate={this.timeUpdate}
+                    src={[
+                        'http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3'
+                    ]}   
+                    onTimeUpdate={this.timeUpdate}
                     />
+                    <p>Source: http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3</p>
                 </div>
+                
                 
                 <div>
                     <h3>Audio from local file</h3>
