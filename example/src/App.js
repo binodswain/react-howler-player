@@ -47,22 +47,29 @@ export default class App extends PureComponent {
         const { file_path, name } = this.state;
         return (
             <div>
-                
+                <h1>react-howler-player<br/>example</h1>
                 <div className="playerlist">
-                    <h3>Audio from remote url</h3>
+                    <h3>1. Audio from remote url</h3>
                     <h5><a href="http://https://librivox.org/pride-and-prejudice-by-jane-austen-solo-project/" target="_blank" rel="noopener noreferrer"> Pride and Prejudice (version 2)</a></h5>
                     <Player
-                    src={[
-                        'http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3'
-                    ]}   
-                    onTimeUpdate={this.timeUpdate}
+                        src={[
+                            'http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3'
+                        ]}   
+                        onTimeUpdate={this.timeUpdate}
+                    />
+                    <Player
+                        src={[
+                            'http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3'
+                        ]}   
+                        onTimeUpdate={this.timeUpdate}
+                        isDark={true}
                     />
                     <p>Source: http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3</p>
                 </div>
                 
                 
                 <div>
-                    <h3>Audio from local file</h3>
+                    <h3>2. Audio from local file</h3>
                     <div className="form-element">
                         <input type="file" 
                             className="file-input" 

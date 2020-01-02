@@ -31,6 +31,11 @@ npm start
 This will start a React app (bootstrapped with create-react-app) with multiple player instances.
 One player instance with remote URL and one with local file.
 
+## Screenshot
+
+![Screenshot 1](/example/react-howler-player.png?raw=true "player")
+
+
 ## Features:
 - Clean: uses semantic elements for UI. 
 - Controls: supports Keyboard events/ controls.
