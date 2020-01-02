@@ -5,6 +5,7 @@
   "module": "build/index.es.js",
   "description": "React package to display minimalist audio player UI adding wrapper on howler.js",
   "scripts": {
+    "test": "jest --verbose ./test",
     "lint:js": "eslint src/*.js",
     "prebuild": "npm run lint:js",
     "build": "rollup -c",
