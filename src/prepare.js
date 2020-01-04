@@ -21,7 +21,7 @@ export default class Prepare extends Component {
 
         return (
             <div className={className}>
-                <div className={`prepare notready`}>
+                <div className={"prepare notready"}>
                     {loadingText}
                 </div>
             </div>
