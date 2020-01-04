@@ -1,0 +1,47 @@
+.form-label {
+  padding: 10px 30px;
+  text-align: center;
+  border: 2px solid grey;
+  color: black;
+  margin-bottom: 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.form-element {
+  position: relative;
+}
+
+.form-element .icon-close {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.button-code {
+  background: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.expandable-section {
+  &.close {
+    display: none;
+  }
+
+  &.expand {
+    display: block;
+  }
+}
+
+.player + .button-code {
+  margin-top: 15px;
+}
