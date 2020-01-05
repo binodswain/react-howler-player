@@ -478,7 +478,7 @@ class PlayerComponent extends Component {
 }
 
 PlayerComponent.propTypes = {
-    src: PropTypes.string.isRequired,
+    src: PropTypes.array.isRequired,
     format: PropTypes.array,
     loadingText: PropTypes.string,
     isDark: PropTypes.bool,

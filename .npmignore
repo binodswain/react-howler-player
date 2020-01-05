@@ -2,6 +2,7 @@ src
 example
 .babelrc
 webpack.config.js
+rollup.config.js
 .gitignore
 README.md
 node_modules/
@@ -9,3 +10,4 @@ example/
 .eslintrc.json
 website/
 test/
+*.map
