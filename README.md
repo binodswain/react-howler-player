@@ -3,6 +3,7 @@
 [![issues](https://badgen.net/github/issues/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/issues)
 [![license](https://badgen.net/github/license/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/blob/master/LICENSE)
 [![Build Status](https://travis-ci.com/binodswain/react-howler-player.svg?branch=master)](https://travis-ci.com/binodswain/react-howler-player)
+
 This is a simple, accessible audio player built using Reactjs and Howlerjs.
 [view demo](https://binodswain.github.io/react-howler-player/)
 
