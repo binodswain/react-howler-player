@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import  "./styles.scss";
+import style from "./styles.scss";
 
 export default class Prepare extends Component {
     static propTypes = {
@@ -15,13 +15,13 @@ export default class Prepare extends Component {
         } = this.props;
 
         let className = [
-            "player", "r-howler",
-            isDark ? "dark-themed" : "light-themed"
+            style["player"], style["r-howler"],
+            style[isDark ? "dark-themed" : "light-themed"]
         ].join(" ");
 
         return (
             <div className={className}>
-                <div className={"prepare notready"}>
+                <div className={[style["prepare"],style["notready"]].join(" ")}>
                     {loadingText}
                 </div>
             </div>
