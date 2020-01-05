@@ -1,6 +1,10 @@
 # react-howler-player
+[![release](https://badgen.net/npm/v/react-howler-player)](https://www.npmjs.com/package/react-howler-player)
+[![issues](https://badgen.net/github/issues/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/issues)
+[![license](https://badgen.net/github/license/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/blob/master/LICENSE)
+[![Build Status](https://travis-ci.com/binodswain/react-howler-player.svg?branch=master)](https://travis-ci.com/binodswain/react-howler-player)
 This is a simple, accessible audio player built using Reactjs and Howlerjs.
-Checkout the demo page [WIP]
+[view demo](https://binodswain.github.io/react-howler-player/)
 
 ## [howler.js](https://howlerjs.com/)
 Javascript audio library for the modern web. howler.js makes working with audio in JavaScript easy and reliable across all platforms.
@@ -21,7 +25,7 @@ const App = () => {
     </div>
 }
 ```
-## Demo
+## Example
 ```bash
 git clone git@github.com:binodswain/react-howler-player.git
 cd react-howler-player/example
