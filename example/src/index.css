@@ -1,37 +1,37 @@
 body {
-  margin: 3em auto;
-  padding: 0;
-  font-family: sans-serif;
-  /* width: 50%; */
-  max-width: 900px;
-  -moz-user-focus: ignore;
-  /* background-color:rgb(33,33,33); */
+    margin: 3em auto;
+    padding: 0;
+    font-family: sans-serif;
+    /* width: 50%; */
+    max-width: 900px;
+    -moz-user-focus: ignore;
+    /* background-color:rgb(33,33,33); */
 }
 
-.playerlist > div{
-  margin-bottom: 2em;
+.playerlist > div {
+    margin-bottom: 2em;
 }
 
 .form-label {
-  padding: 10px 30px;
-  text-align: center;
-  border: 2px solid grey;
-  color: black;
-  margin-bottom: 20px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 0;
+    padding: 10px 30px;
+    text-align: center;
+    border: 2px solid grey;
+    color: black;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 0;
 }
 
 .form-element {
-  position: relative;
+    position: relative;
 }
 
 .form-element .icon-close {
-  position: absolute;
-  top: 9px;
-  right: 10px;
-  cursor: pointer;
-  z-index: 1;
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1;
 }
