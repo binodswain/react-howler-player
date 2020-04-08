@@ -342,7 +342,7 @@ class PlayerComponent extends Component {
     render() {
         const { playerState, progressValue, duration, currentPos, volume, isMute } = this.state;
 
-        const { isDark = false, preparingComp } = this.props;
+        const { isDark = false } = this.props;
 
         if (playerState === STATE.PREPARE) {
             return <Prepare {...this.props} />;
