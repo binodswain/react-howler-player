@@ -15,7 +15,7 @@ Javascript audio library for the modern web. howler.js makes working with audio 
 ## Usage
 
 ```bash
-npm install --save react-howler-player
+npm install --save howler react-howler-player
 ```
 
 ```jsx
@@ -25,7 +25,11 @@ import Player from "react-howler-player";
 const App = () => {
     return (
         <div>
-            <Player src={["audio file URL"]} onTimeUpdate={this.timeUpdate} isDark={true} />
+            <Player
+                src={["audio file URL"]}
+                isDark={true}
+                // onTimeUpdate={timeUpdate}
+            />
         </div>
     );
 };
@@ -53,8 +57,8 @@ One player instance with remote URL and one with local file.
 | ------------- | :-------: | :------: | :----------------------------------------------------------------------------- |
 | src           |   Array   |  false   | Source of audio playback                                                       |
 | isDark        |  Boolean  |   true   | Flag to switch between light and dark theme                                    |
-| onTimeUpdate  | function  |   true   | Object that updates default text/bg color                                      |
-| loadingText   | function  |   true   | Text displayed while prepaing the playback.(default val: 'Preparing')          |
+| onTimeUpdate  | function  |   true   | On playback progress, timestamp obj is passed to the function                  |
+| loadingText   | function  |   true   | Text displayed while preparing the playback.(default val: 'Preparing')         |
 | preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp || loadingText)` |
 
 ## Features:
