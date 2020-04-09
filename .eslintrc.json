@@ -4,10 +4,7 @@
         "browser": true,
         "es6": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -19,9 +16,7 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "settings": {
         "react": {
             "version": "detect"
@@ -29,7 +24,13 @@
     },
     "rules": {
         "quotes": ["error", "double"],
-        "indent": ["error", 4],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
         "semi": ["error", "always"],
         "no-console": 1,
         "no-irregular-whitespace": "off",
