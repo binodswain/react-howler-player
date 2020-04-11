@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from "react";
 import { Howl } from "howler";
 import PropTypes from "prop-types";
@@ -63,7 +64,7 @@ class PlayerComponent extends Component {
         if (!src) {
             return;
         }
-        let sound = new Howl({
+        const sound = new Howl({
             src,
             format,
             html5: true,
@@ -90,7 +91,7 @@ class PlayerComponent extends Component {
         const { onTimeUpdate } = this.props;
         const { duration } = this.state;
         if (onTimeUpdate) {
-            let playerState = {
+            const playerState = {
                 currentTime: this.state.sound.duration(),
                 progressPercent: 100,
             };
@@ -131,8 +132,8 @@ class PlayerComponent extends Component {
      * @return {String}      Formatted time.
      */
     formatTime = (secs) => {
-        var minutes = Math.floor(secs / 60) || 0;
-        var seconds = secs - minutes * 60 || 0;
+        const minutes = Math.floor(secs / 60) || 0;
+        const seconds = secs - minutes * 60 || 0;
 
         return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     };
@@ -143,9 +144,9 @@ class PlayerComponent extends Component {
      */
     seek = (e) => {
         const { sound } = this.state;
-        let per = e.target.value / 100;
+        const per = e.target.value / 100;
         sound.seek(sound.duration() * per);
-        let seek = sound.seek() || 0;
+        const seek = sound.seek() || 0;
         this.setState({
             progressValue: e.target.value,
             currentPos: this.formatTime(Math.round(seek)),
@@ -153,12 +154,12 @@ class PlayerComponent extends Component {
     };
 
     step = () => {
-        let { sound } = this.state;
+        const { sound } = this.state;
         const { onTimeUpdate } = this.props;
 
-        var seek = sound.seek() || 0;
+        const seek = sound.seek() || 0;
 
-        let percentage = (seek / sound.duration()) * 100 || 0;
+        const percentage = (seek / sound.duration()) * 100 || 0;
 
         // If the sound is still playing, continue stepping.
         if (sound.playing()) {
@@ -168,7 +169,7 @@ class PlayerComponent extends Component {
                 playerState: STATE.PLAYING,
             });
             if (onTimeUpdate) {
-                let playerState = {
+                const playerState = {
                     currentTime: seek,
                     progressPercent: Number(percentage.toFixed(3)),
                 };
@@ -217,8 +218,8 @@ class PlayerComponent extends Component {
 
     seekForward = () => {
         const { sound } = this.state;
-        let currentPos = sound.seek();
-        let duration = sound.duration();
+        const currentPos = sound.seek();
+        const duration = sound.duration();
         let forward = duration / 20 < 10 ? 10 : duration / 20;
         if (currentPos + forward > duration) {
             return;
@@ -228,7 +229,7 @@ class PlayerComponent extends Component {
             forward = 10;
         }
         sound.seek(currentPos + forward);
-        let percentage = ((currentPos + forward) / sound.duration()) * 100 || 0;
+        const percentage = ((currentPos + forward) / sound.duration()) * 100 || 0;
         this.setState({
             progressValue: Math.round(percentage),
             currentPos: this.formatTime(Math.round(currentPos + forward)),
@@ -237,8 +238,8 @@ class PlayerComponent extends Component {
 
     seekBackward = () => {
         const { sound } = this.state;
-        let currentPos = sound.seek();
-        let duration = sound.duration();
+        const currentPos = sound.seek();
+        const duration = sound.duration();
         let backward = duration / 20 < 10 ? 10 : duration / 20;
         if (currentPos - backward < 0) {
             return;
@@ -249,7 +250,7 @@ class PlayerComponent extends Component {
         }
         sound.seek(currentPos - backward);
 
-        let percentage = ((currentPos - backward) / sound.duration()) * 100 || 0;
+        const percentage = ((currentPos - backward) / sound.duration()) * 100 || 0;
         this.setState({
             progressValue: Math.round(percentage),
             currentPos: this.formatTime(Math.round(currentPos - backward)),
@@ -266,10 +267,11 @@ class PlayerComponent extends Component {
         event.preventDefault();
         event.stopPropagation();
 
+        const focusedEle = document.activeElement;
+
         switch (keyboardEvents.keyCodes[code]) {
             case "space":
             case "return":
-                let focusedEle = document.activeElement;
                 if (focusedEle.name === "volume") {
                     if (isMute) {
                         sound.mute(false);
@@ -348,7 +350,7 @@ class PlayerComponent extends Component {
             return <Prepare {...this.props} />;
         }
 
-        let className = [
+        const className = [
             style["player"],
             style["r-howler"],
             style[isDark ? "dark-themed" : "light-themed"],

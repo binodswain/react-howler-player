@@ -90,3 +90,5 @@ typings/
 example/build/
 
 build
+example/build/
+dist

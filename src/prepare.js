@@ -12,7 +12,7 @@ export default class Prepare extends Component {
     render() {
         const { loadingText = "Preparing", isDark, preparingComp } = this.props;
 
-        let className = [
+        const className = [
             style["player"],
             style["r-howler"],
             style[isDark ? "dark-themed" : "light-themed"],
