@@ -7,7 +7,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 
-let isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 export default {
     input: "./src/index.js",

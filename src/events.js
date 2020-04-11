@@ -1,4 +1,4 @@
-let evt = {
+const evt = {
     backSpace: 8,
     tab: 9,
     clear: 12,
@@ -60,12 +60,12 @@ let evt = {
     f15: 126,
     numLock: 144,
     scrollLock: 145,
-    m: 77
+    m: 77,
 };
 
-/*An map of keycode and evt.name*/
 evt.keyCodes = Object.keys(evt).reduce((obj, name) => {
-    obj[evt[name]] = name; return obj;
+    obj[evt[name]] = name;
+    return obj;
 }, {});
 
 export default evt;
