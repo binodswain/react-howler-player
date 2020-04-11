@@ -3,7 +3,6 @@
 [![release](https://badgen.net/npm/v/react-howler-player)](https://www.npmjs.com/package/react-howler-player)
 [![open-issues](https://badgen.net/github/open-issues/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/issues)
 [![license](https://badgen.net/github/license/binodswain/react-howler-player)](https://github.com/binodswain/react-howler-player/blob/master/LICENSE)
-[![Build Status](https://travis-ci.com/binodswain/react-howler-player.svg?branch=master)](https://travis-ci.com/binodswain/react-howler-player)
 [![Test Status](https://github.com/binodswain/react-howler-player/workflows/Test/badge.svg)](https://github.com/binodswain/react-howler-player/actions?query=workflow%3ATest)
 [![Build Status](https://github.com/binodswain/react-howler-player/workflows/Build/badge.svg)](https://github.com/binodswain/react-howler-player/actions?query=workflow%3ABuild)
 
