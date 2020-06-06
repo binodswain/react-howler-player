@@ -72,11 +72,13 @@ export default class App extends PureComponent {
                         ]}
                         onTimeUpdate={this.timeUpdate}
                         preparingComp={<Loading />}
-                    />
+                        speedPanel={"top"}
+                        />
                     <Player
                         src={[
                             "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
                         ]}
+                        speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
                         isDark={true}
                     />

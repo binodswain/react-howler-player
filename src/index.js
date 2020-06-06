@@ -15,6 +15,9 @@ const STATE = {
     PLAYING: "PLAYING",
 };
 
+// audio playback speed
+const rateOptions = [0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4];
+
 class PlayerComponent extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +29,13 @@ class PlayerComponent extends Component {
             currentPos: "0:00",
             volume: 70,
             isMute: false,
+
+            isSettingsOpen: false,
+            rate: 1,
+            ratePanel: false,
         };
+        this.rateRef = React.createRef();
+        this.rateDivRef = React.createRef();
     }
 
     stepInterval = null;
@@ -124,6 +133,7 @@ class PlayerComponent extends Component {
 
     componentDidMount() {
         this.setupPlayer();
+        this.addResizeListener();
     }
 
     /**
@@ -322,7 +332,56 @@ class PlayerComponent extends Component {
 
     componentWillUnmount() {
         this.destroySound();
+        this.removeResizeListener();
     }
+
+    setVolumePosition = () => {
+        const { rate, ratePanel } = this.state;
+        if (!ratePanel) {
+            return;
+        }
+
+        const {
+            speedPanel = "relative", // 'top', 'bottom', 'relative'
+        } = this.props;
+
+        const { current: rateOlEle } = this.rateRef;
+        const { current: rateDivEle } = this.rateDivRef;
+
+        const rect = rateDivEle.getBoundingClientRect();
+        const rectOl = rateOlEle.getBoundingClientRect();
+
+        console.log(rect);
+        const { left, top, right } = rect;
+        const { height } = rectOl;
+
+        const listItemHeight = height / rateOptions.length;
+
+        if (speedPanel === "relative") {
+            const selectedIndex = rateOptions.indexOf(rate);
+
+            rateOlEle.style.left = `${right - 40}px`;
+            rateOlEle.style.top = `${top - listItemHeight * selectedIndex + 2.5}px`;
+        } else if (speedPanel === "top") {
+            rateOlEle.style.left = `${right - 40}px`;
+            rateOlEle.style.top = `${top - height + listItemHeight + 11}px`;
+        } else if (speedPanel === "bottom") {
+            rateOlEle.style.left = `${right - 40}px`;
+            rateOlEle.style.top = `${top - 9}px`;
+        }
+    };
+
+    addResizeListener = () => {
+        window.addEventListener("resize", () => {
+            this.setVolumePosition();
+        });
+    };
+
+    removeResizeListener = () => {
+        window.addEventListener("resize", function () {
+            this.setVolumePosition();
+        });
+    };
 
     destroySound = () => {
         const { sound } = this.state;
@@ -341,8 +400,46 @@ class PlayerComponent extends Component {
         }
     }
 
+    toggleSettingsPanel = (flag) => {
+        this.setState({
+            isSettingsOpen: flag,
+        });
+    };
+
+    setRate = (rate, cb) => {
+        const { sound } = this.state;
+        this.setState(
+            {
+                rate,
+            },
+            () => {
+                if (cb) {
+                    cb();
+                }
+                sound.rate(rate);
+            },
+        );
+    };
+
+    toogleRatePanel = (flag) => {
+        this.setState(
+            {
+                ratePanel: flag,
+            },
+            this.setVolumePosition,
+        );
+    };
+
     render() {
-        const { playerState, progressValue, duration, currentPos, volume, isMute } = this.state;
+        const {
+            playerState,
+            progressValue,
+            duration,
+            currentPos,
+            volume,
+            isMute,
+            ratePanel,
+        } = this.state;
 
         const { isDark = false } = this.props;
 
@@ -523,6 +620,41 @@ class PlayerComponent extends Component {
                             }}
                         />
                     </div>
+
+                    <div className={style["player-speed"]} ref={this.rateDivRef}>
+                        <button
+                            className={[
+                                style["player-rate-btn"],
+                                ratePanel ? style["rate-btn-hidden"] : "",
+                            ]
+                                .filter(Boolean)
+                                .join(" ")}
+                            hidden={ratePanel}
+                            onClick={() => this.toogleRatePanel(true)}
+                        >
+                            {this.state.rate} x
+                        </button>
+                        <ol hidden={!ratePanel} ref={this.rateRef}>
+                            {rateOptions.map((rate, index) => {
+                                const selected = rate == this.state.rate;
+                                const attr = {};
+                                if (selected) {
+                                    attr.className = style["selected-option"];
+                                }
+                                return (
+                                    <li
+                                        {...attr}
+                                        onClick={() =>
+                                            this.setRate(rate, () => this.toogleRatePanel(false))
+                                        }
+                                    >
+                                        {rate}
+                                        <span aria-hidden="true">x</span>
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </div>
                 </div>
             </div>
         );
@@ -537,10 +669,4 @@ PlayerComponent.propTypes = {
     onTimeUpdate: PropTypes.func,
 };
 
-let rootComponent;
-
-if (typeof window !== "undefined") {
-    rootComponent = PlayerComponent;
-}
-
-export default rootComponent;
+export default PlayerComponent;
