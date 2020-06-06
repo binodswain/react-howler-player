@@ -1,1 +1,69 @@
-{"errors":[],"warnings":["./node_modules/React/cjs/react.production.min.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\cjs\\react.production.min.js\n    Used by 1 module(s), i. e.\n    C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\index.js\n* C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\cjs\\react.production.min.js\n    Used by 1 module(s), i. e.\n    C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\index.js","./node_modules/React/index.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\index.js\n    Used by 6 module(s), i. e.\n    C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\gatsby\\dist\\utils\\babel-loader.js??ref--4-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\src\\components\\githubFork.js\n* C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\index.js\n    Used by 133 module(s), i. e.\n    C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\gatsby\\dist\\utils\\babel-loader.js??ref--4-0!C:\\Users\\Binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\.cache\\production-app.js"],"namedChunkGroups":{"app":{"chunks":[5,0,2],"assets":["webpack-runtime-142e62e6333f8eefe3d2.js","webpack-runtime-142e62e6333f8eefe3d2.js.map","commons-018a83306ab0909ea699.js","commons-018a83306ab0909ea699.js.map","app-d13443566b0bf0002720.js","app-d13443566b0bf0002720.js.map"],"children":{},"childAssets":{}},"component---src-pages-index-js":{"chunks":[1,0,3],"assets":["styles.5a6541e88c53d7e39cd7.css","styles-bc7f2a998b197a593f49.js","styles-bc7f2a998b197a593f49.js.map","commons-018a83306ab0909ea699.js","commons-018a83306ab0909ea699.js.map","component---src-pages-index-js-2e3817c0721dde426a20.js","component---src-pages-index-js-2e3817c0721dde426a20.js.map"],"children":{},"childAssets":{}},"component---src-pages-local-file-js":{"chunks":[1,0,4],"assets":["styles.5a6541e88c53d7e39cd7.css","styles-bc7f2a998b197a593f49.js","styles-bc7f2a998b197a593f49.js.map","commons-018a83306ab0909ea699.js","commons-018a83306ab0909ea699.js.map","component---src-pages-local-file-js-fa8ccffae8ccb23b24a7.js","component---src-pages-local-file-js-fa8ccffae8ccb23b24a7.js.map"],"children":{},"childAssets":{}}},"assetsByChunkName":{"app":["webpack-runtime-142e62e6333f8eefe3d2.js","commons-018a83306ab0909ea699.js","app-d13443566b0bf0002720.js"],"component---src-pages-index-js":["styles.5a6541e88c53d7e39cd7.css","styles-bc7f2a998b197a593f49.js","commons-018a83306ab0909ea699.js","component---src-pages-index-js-2e3817c0721dde426a20.js"],"component---src-pages-local-file-js":["styles.5a6541e88c53d7e39cd7.css","styles-bc7f2a998b197a593f49.js","commons-018a83306ab0909ea699.js","component---src-pages-local-file-js-fa8ccffae8ccb23b24a7.js"]}}
+{
+    "errors": [],
+    "warnings": [
+        "./node_modules/React/cjs/react.production.min.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\cjs\\react.production.min.js\n    Used by 1 module(s), i. e.\n    C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\index.js\n* C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\cjs\\react.production.min.js\n    Used by 1 module(s), i. e.\n    C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\index.js",
+        "./node_modules/React/index.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\React\\index.js\n    Used by 6 module(s), i. e.\n    C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\gatsby\\dist\\utils\\babel-loader.js??ref--4-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\src\\components\\githubFork.js\n* C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\babel-loader\\lib\\index.js??ref--11-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\react\\index.js\n    Used by 133 module(s), i. e.\n    C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\node_modules\\gatsby\\dist\\utils\\babel-loader.js??ref--4-0!C:\\Users\\binod\\Documents\\codes\\GitHub\\NPM Package\\react-component\\react-howler-player\\website\\.cache\\production-app.js"
+    ],
+    "namedChunkGroups": {
+        "app": {
+            "chunks": [5, 0, 2],
+            "assets": [
+                "webpack-runtime-6929399e6332a649b18a.js",
+                "webpack-runtime-6929399e6332a649b18a.js.map",
+                "commons-2574188044cace40d3f2.js",
+                "commons-2574188044cace40d3f2.js.map",
+                "app-d13443566b0bf0002720.js",
+                "app-d13443566b0bf0002720.js.map"
+            ],
+            "children": {},
+            "childAssets": {}
+        },
+        "component---src-pages-index-js": {
+            "chunks": [1, 0, 3],
+            "assets": [
+                "styles.486f1a355734f2701895.css",
+                "styles-be526f7942cde387e731.js",
+                "styles-be526f7942cde387e731.js.map",
+                "commons-2574188044cace40d3f2.js",
+                "commons-2574188044cace40d3f2.js.map",
+                "component---src-pages-index-js-51e39d505bb7f0da9d11.js",
+                "component---src-pages-index-js-51e39d505bb7f0da9d11.js.map"
+            ],
+            "children": {},
+            "childAssets": {}
+        },
+        "component---src-pages-local-file-js": {
+            "chunks": [1, 0, 4],
+            "assets": [
+                "styles.486f1a355734f2701895.css",
+                "styles-be526f7942cde387e731.js",
+                "styles-be526f7942cde387e731.js.map",
+                "commons-2574188044cace40d3f2.js",
+                "commons-2574188044cace40d3f2.js.map",
+                "component---src-pages-local-file-js-ef233b521793b7a196d2.js",
+                "component---src-pages-local-file-js-ef233b521793b7a196d2.js.map"
+            ],
+            "children": {},
+            "childAssets": {}
+        }
+    },
+    "assetsByChunkName": {
+        "app": [
+            "webpack-runtime-6929399e6332a649b18a.js",
+            "commons-2574188044cace40d3f2.js",
+            "app-d13443566b0bf0002720.js"
+        ],
+        "component---src-pages-index-js": [
+            "styles.486f1a355734f2701895.css",
+            "styles-be526f7942cde387e731.js",
+            "commons-2574188044cace40d3f2.js",
+            "component---src-pages-index-js-51e39d505bb7f0da9d11.js"
+        ],
+        "component---src-pages-local-file-js": [
+            "styles.486f1a355734f2701895.css",
+            "styles-be526f7942cde387e731.js",
+            "commons-2574188044cace40d3f2.js",
+            "component---src-pages-local-file-js-ef233b521793b7a196d2.js"
+        ]
+    }
+}
