@@ -86,12 +86,10 @@
     "license": "MIT",
     "lint-staged": {
         "*.scss": [
-            "prettier --write",
-            "git add"
+            "prettier --write"
         ],
         "*.{js,jsx,mjs,md,json,yml}": [
-            "prettier-eslint --write",
-            "git add"
+            "prettier-eslint --write"
         ]
     },
     "husky": {

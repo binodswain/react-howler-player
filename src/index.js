@@ -351,7 +351,6 @@ class PlayerComponent extends Component {
         const rect = rateDivEle.getBoundingClientRect();
         const rectOl = rateOlEle.getBoundingClientRect();
 
-        console.log(rect);
         const { left, top, right } = rect;
         const { height } = rectOl;
 
@@ -644,6 +643,7 @@ class PlayerComponent extends Component {
                                 return (
                                     <li
                                         {...attr}
+                                        key={index}
                                         onClick={() =>
                                             this.setRate(rate, () => this.toogleRatePanel(false))
                                         }
@@ -667,6 +667,7 @@ PlayerComponent.propTypes = {
     loadingText: PropTypes.string,
     isDark: PropTypes.bool,
     onTimeUpdate: PropTypes.func,
+    speedPanel: PropTypes.string,
 };
 
 export default PlayerComponent;
