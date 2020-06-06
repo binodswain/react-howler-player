@@ -1,6 +1,6 @@
 {
     "name": "react-howler-player",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "main": "build/index.js",
     "module": "build/index.es.js",
     "description": "React package to display minimalist audio player UI adding wrapper on howler.js",
@@ -86,12 +86,10 @@
     "license": "MIT",
     "lint-staged": {
         "*.scss": [
-            "prettier --write",
-            "git add"
+            "prettier --write"
         ],
         "*.{js,jsx,mjs,md,json,yml}": [
-            "prettier-eslint --write",
-            "git add"
+            "prettier-eslint --write"
         ]
     },
     "husky": {

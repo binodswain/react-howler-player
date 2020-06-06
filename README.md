@@ -54,13 +54,14 @@ One player instance with remote URL and one with local file.
 
 ## Props passed to component
 
-| attribute     |   type    | optional | details                                                                        |
-| ------------- | :-------: | :------: | :----------------------------------------------------------------------------- |
-| src           |   Array   |  false   | Source of audio playback                                                       |
-| isDark        |  Boolean  |   true   | Flag to switch between light and dark theme                                    |
-| onTimeUpdate  | function  |   true   | On playback progress, timestamp obj is passed to the function                  |
-| loadingText   | function  |   true   | Text displayed while preparing the playback.(default val: 'Preparing')         |
-| preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp || loadingText)` |
+| attribute     |   type    | optional | details                                                                                      |
+| ------------- | :-------: | :------: | :------------------------------------------------------------------------------------------- |
+| src           |   Array   |  false   | Source of audio playback                                                                     |
+| isDark        |  Boolean  |   true   | Flag to switch between light and dark theme                                                  |
+| onTimeUpdate  | function  |   true   | On playback progress, timestamp obj is passed to the function                                |
+| loadingText   | function  |   true   | Text displayed while preparing the playback.(default val: 'Preparing')                       |
+| preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp || loadingText)`               |
+| speedPanel    |  string   |   true   | Position of audio playback rate list. ('top', 'bottom', 'relative'). defaultVal : 'relative' |
 
 ## Features:
 

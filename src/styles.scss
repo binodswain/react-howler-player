@@ -1,14 +1,56 @@
+$primary: (
+    "dark": #37adbf,
+    "light": #37adbf,
+);
+$slider-thumb-color: (
+    "dark": #37adbf,
+    "light": white,
+);
+$secondary: (
+    "dark": grey,
+    "light": grey,
+);
+$background-color: (
+    "dark": rgba(26, 26, 26, 0.8),
+    "light": white,
+);
+$button-bgcolor: (
+    "light": rgba(26, 26, 26, 0.8),
+    "dark": white,
+);
+$range-track-color: (
+    "dark": black,
+    "light": #ccc,
+);
+$range-track-progress-color: (
+    "dark": white,
+    "light": #37adbf,
+);
+$white: (
+    "dark": white,
+    "light": white,
+);
+$audio-duration: (
+    "dark": white,
+    "light": rgba(26, 26, 26, 0.8),
+);
+$duration: (
+    "dark": #929292,
+    "light": #929292,
+);
 
-$primary: ("dark": #37adbf, "light":#37adbf);
-$slider-thumb-color: ("dark": #37adbf, "light": white);
-$secondary: ("dark": grey, "light": grey);
-$background-color: ("dark": rgba(26,26,26,.8), "light": white);
-$button-bgcolor: ("light": rgba(26,26,26,.8), "dark": white);
-$range-track-color: ("dark": black, "light":#ccc);
-$range-track-progress-color: ("dark": white, "light":#37adbf);
-$white: ("dark": white, "light":white);
-$audio-duration: ("dark": white, "light": rgba(26,26,26,.8));
-$duration: ("dark": #929292, "light": #929292);
+$rate-color: (
+    "dark": white,
+    "light": rgba(26, 26, 26, 0.8),
+);
+$pannel-color: (
+    "dark": rgba(26, 26, 26, 0.8),
+    "light": white,
+);
+$pannel-bg-color: (
+    "dark": rgba(26, 26, 26, 0.8),
+    "light": lightgrey,
+);
 
 // https://codepen.io/trevanhetzel/pen/rOVrGK
 
@@ -17,12 +59,12 @@ $themes: dark light;
 @mixin rangeThumb {
     width: 15px;
     height: 15px;
-    margin: -5px 0  0;
+    margin: -5px 0 0;
     border-radius: 50%;
     cursor: pointer;
     border: 0 !important;
     z-index: 4;
-    box-shadow: 0 0 2px rgba(0,0,0,0.6);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 }
 
 @mixin rangeTrack {
@@ -44,7 +86,7 @@ $themes: dark light;
 }
 
 @each $theme in $themes {
-  // Here are the rules specific to the colors in the theme
+    // Here are the rules specific to the colors in the theme
     .r-howler.#{$theme}-themed {
         &.player {
             position: relative;
@@ -54,7 +96,7 @@ $themes: dark light;
             align-items: center;
             overflow: hidden;
             height: 45px;
-            box-shadow: 0 0 2px rgba(0,0,0,0.6);
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
             background-color: map-get($background-color, $theme);
             border-radius: 4px;
         }
@@ -74,7 +116,7 @@ $themes: dark light;
             padding: 6px;
             border: none;
             margin: 0;
-            fill: map-get($button-bgcolor, $theme );
+            fill: map-get($button-bgcolor, $theme);
             background: transparent;
             border-radius: 5px;
             cursor: pointer;
@@ -86,9 +128,53 @@ $themes: dark light;
             align-items: center;
 
             &:hover {
-                background: map-get($primary, $theme );
-                fill: map-get($background-color, $theme )
+                background: map-get($primary, $theme);
+                fill: map-get($background-color, $theme);
             }
+        }
+
+        .player-rate-btn {
+            color: map-get($rate-color, $theme);
+            border-radius: 5px;
+            margin-right: 0;
+            width: 100%;
+        }
+
+        .player-speed {
+            position: relative;
+            min-width: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: map-get($pannel-bg-color, $theme);
+            z-index: 999;
+            position: fixed;
+            border-radius: 4px;
+            left: 0;
+            text-align: center;
+            width: 47px;
+
+            li {
+                font-size: 13px;
+                margin: 0 2.5px;
+                padding: 5px 2.5px;
+                color: map-get($button-bgcolor, $theme);
+                cursor: pointer;
+
+                &.selected-option {
+                    background-color: map-get($primary, $theme);
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        .rate-btn-hidden {
+            opacity: 0;
         }
 
         .progress-bar {
@@ -106,9 +192,9 @@ $themes: dark light;
                 appearance: none;
                 z-index: 3;
 
-                @supports (-moz-appearance:none) { 
+                @supports (-moz-appearance: none) {
                     display: none;
-                } 
+                }
                 // margin: 0 5px;
                 &::-moz-progress-bar {
                     display: none;
@@ -124,7 +210,8 @@ $themes: dark light;
                 }
             }
         }
-        .player-progress { // https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+        .player-progress {
+            // https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
             width: 100%;
             border: 0;
             padding: 0;
@@ -160,8 +247,13 @@ $themes: dark light;
             // Track
             &::-webkit-slider-runnable-track {
                 @include rangeTrack;
-                background: linear-gradient(to right, map-get($range-track-progress-color, $theme), map-get($range-track-progress-color, $theme) var(--progress-value, 0), map-get($range-track-color, $theme) var(--progress-value, 0));
-                content: ""
+                background: linear-gradient(
+                    to right,
+                    map-get($range-track-progress-color, $theme),
+                    map-get($range-track-progress-color, $theme) var(--progress-value, 0),
+                    map-get($range-track-color, $theme) var(--progress-value, 0)
+                );
+                content: "";
                 // margin-top: -6px;
             }
 
@@ -182,7 +274,7 @@ $themes: dark light;
         }
 
         .volume-control {
-            padding-right: 10px;
+            padding-right: 5px;
             display: flex;
             align-items: center;
             .audio-bar {
@@ -212,18 +304,22 @@ $themes: dark light;
                     -webkit-appearance: none;
                     @include rangeThumb;
                     background: map-get($slider-thumb-color, $theme);
-                    
                 }
 
                 &:focus {
-                // outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+                    // outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
                 }
 
                 // Track
                 &::-webkit-slider-runnable-track {
                     @include rangeTrack;
-                    background: linear-gradient(to right, map-get($range-track-progress-color, $theme), map-get($range-track-progress-color, $theme) var(--progress-value, 0), map-get($range-track-color, $theme) var(--progress-value, 0));
-                    content: '';
+                    background: linear-gradient(
+                        to right,
+                        map-get($range-track-progress-color, $theme),
+                        map-get($range-track-progress-color, $theme) var(--progress-value, 0),
+                        map-get($range-track-color, $theme) var(--progress-value, 0)
+                    );
+                    content: "";
                 }
 
                 &::-moz-range-track {
@@ -250,7 +346,7 @@ $themes: dark light;
             white-space: nowrap;
             pointer-events: none;
             cursor: default;
-            color: map-get($audio-duration, $theme );
+            color: map-get($audio-duration, $theme);
             font-size: 14px;
             font-variant-numeric: normal;
             text-shadow: none;
@@ -262,8 +358,7 @@ $themes: dark light;
             }
         }
 
-        input[type=range]:focus {
-            
+        input[type="range"]:focus {
         }
         .prepare {
             color: map-get($secondary, $theme);
