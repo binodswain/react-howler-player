@@ -630,6 +630,7 @@ class PlayerComponent extends Component {
                                 .join(" ")}
                             hidden={ratePanel}
                             onClick={() => this.toogleRatePanel(true)}
+                            type="button"
                         >
                             {this.state.rate} x
                         </button>
