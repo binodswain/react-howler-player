@@ -81,6 +81,7 @@ export default class App extends PureComponent {
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
                         isDark={true}
+                        onLoad={(data)=>console.log(data)}
                     />
                     <p>
                         Source:

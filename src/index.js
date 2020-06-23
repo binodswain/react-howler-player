@@ -57,13 +57,24 @@ class PlayerComponent extends Component {
 
     readyToPlay = () => {
         const { playerState, sound } = this.state;
+        const { onLoad } = this.props;
+
         if (playerState === STATE.PLAYING) {
             return;
         }
-        this.setState({
-            playerState: STATE.READY,
-            duration: this.formatTime(Math.round(sound.duration())),
-        });
+
+        const meta = {
+            duration: Math.round(sound.duration()),
+            volume: sound.volume(),
+        };
+
+        this.setState(
+            {
+                playerState: STATE.READY,
+                duration: this.formatTime(Math.round(sound.duration())),
+            },
+            onLoad ? () => onLoad(meta) : undefined,
+        );
     };
 
     setupPlayer = () => {
@@ -669,6 +680,7 @@ PlayerComponent.propTypes = {
     isDark: PropTypes.bool,
     onTimeUpdate: PropTypes.func,
     speedPanel: PropTypes.string,
+    onLoad: PropTypes.func,
 };
 
 export default PlayerComponent;
