@@ -95,10 +95,10 @@ $themes: dark light;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            height: 45px;
+            min-height: 45px;
             box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
             background-color: map-get($background-color, $theme);
-            border-radius: 4px;
+            // border-radius: 4px;
         }
 
         .player-controls {
@@ -219,24 +219,25 @@ $themes: dark light;
             height: 4px;
             border-radius: 4px;
             min-width: 50px;
+            margin: 0;
             // background: transparent;
             z-index: 2;
 
             &::-moz-range-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 
             &::-ms-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 
             &::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 

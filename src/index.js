@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Howl } from "howler";
 import PropTypes from "prop-types";
 import { isEqual, renderSVGicons } from "./func";
 import Prepare from "./prepare";
 import keyboardEvents from "./events";
 import style from "./styles.scss";
+import pStyle from "./profile.scss";
 
 const STATE = {
     PREPARE: "PREPARE",
@@ -451,7 +452,7 @@ class PlayerComponent extends Component {
             ratePanel,
         } = this.state;
 
-        const { isDark = false } = this.props;
+        const { isDark = false, profile = "generic" } = this.props;
 
         if (playerState === STATE.PREPARE) {
             return <Prepare {...this.props} />;
@@ -484,7 +485,7 @@ class PlayerComponent extends Component {
         }
 
         const currentPosRound = Math.round(progressValue);
-        const playbackControls = (
+        const playbackControl = (
             <button type="button" {...btnAttrs} onClick={btnFunction}>
                 <svg role="presentation" className={style["icon"]}>
                     <use
@@ -593,6 +594,59 @@ class PlayerComponent extends Component {
             </div>
         );
 
+        let markup = "";
+        if (profile === "top_progress") {
+            markup = (
+                <Fragment>
+                    <div className={pStyle[`profile_${profile}`]}>
+                        {progressBar}
+                        <div className={style["player-controls"]}>
+                            <div className={style["left-controls"]}>
+                                {playbackControl}
+                                {/* {forwardControl} */}
+                                {/* {replayControl} */}
+                            </div>
+                            {audiodurationControls}
+                            {volumeControls}
+                        </div>
+                    </div>
+                </Fragment>
+            );
+        } else if (profile === "generic") {
+            markup = (
+                <Fragment>
+                    <div className={pStyle[`profile_${profile}`]}>
+                        <div className={style["player-controls"]}>
+                            <div className={style["left-controls"]}>
+                                {playbackControl}
+                                {/* {forwardControl} */}
+                                {/* {replayControl} */}
+                            </div>
+                            {progressBar}
+                            {audiodurationControls}
+                            {volumeControls}
+                            {playbackRateList}
+                        </div>
+                    </div>
+                </Fragment>
+            );
+        } else if (profile === "minimal") {
+            markup = (
+                <div className={pStyle[`profile_${profile}`]}>
+                    <div className={style["player-controls"]}>
+                        <div className={style["left-controls"]}>
+                            {/* {forwardControl} */}
+                            {playbackControl}
+                            {/* {replayControl} */}
+                        </div>
+                        {/* {progressBar} */}
+                        {audiodurationControls}
+                        {/* {volumeControls} */}
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div
                 className={className}
@@ -602,13 +656,7 @@ class PlayerComponent extends Component {
                 ref={this.ref}
             >
                 {renderSVGicons()}
-                <div className={style["player-controls"]}>
-                    {playbackControls}
-                    {progressBar}
-                    {audiodurationControls}
-                    {volumeControls}
-                    {playbackRateList}
-                </div>
+                {markup}
             </div>
         );
     }
