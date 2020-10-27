@@ -1,6 +1,6 @@
 {
     "name": "react-howler-player",
-    "version": "1.0.11",
+    "version": "1.1.0-alpha.0",
     "main": "build/index.js",
     "module": "build/index.es.js",
     "description": "React package to display minimalist audio player UI adding wrapper on howler.js",
@@ -101,6 +101,11 @@
         "hooks": {
             "pre-commit": "lint-staged",
             "commit-message": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "standard-version": {
+        "skip": {
+            "changelog": true
         }
     }
 }
