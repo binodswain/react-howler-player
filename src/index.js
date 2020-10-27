@@ -182,7 +182,6 @@ class PlayerComponent extends Component {
     };
 
     step = () => {
-        console.log(`[step func]`);
         const { sound } = this.state;
         const { onTimeUpdate } = this.props;
 
