@@ -10,8 +10,11 @@ function Loading() {
 }
 
 export default class App extends PureComponent {
-    state = {};
+    state = {
+        audio: null,
+    };
     onChange = (event) => {
+        console.log(`[onChange]`, event);
         if (!event.target.files[0]) {
             return;
         }
@@ -45,8 +48,14 @@ export default class App extends PureComponent {
         this.setState({ [name]: value });
     };
 
+    onPlayerReady = (data) => {
+        this.setState({ audio: data.audio });
+    };
+
     render() {
-        const { file_path, name } = this.state;
+        const { file_path, name, audio } = this.state;
+        console.log(audio);
+
         return (
             <div>
                 <h1>
@@ -66,14 +75,30 @@ export default class App extends PureComponent {
                             Pride and Prejudice (version 2)
                         </a>
                     </h5>
-                    <Player
-                        src={[
-                            "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
-                        ]}
-                        onTimeUpdate={this.timeUpdate}
-                        preparingComp={<Loading />}
-                        speedPanel={"top"}
-                        />
+
+                    {/* <Player
+                                       src={[
+                                           "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
+                                       ]}
+                                       onTimeUpdate={this.timeUpdate}
+                                       preparingComp={<Loading />}
+                                       speedPanel={"top"}
+                                   /> */}
+                    <button
+                        onClick={() => {
+                            audio && audio.play();
+                        }}
+                    >
+                        Play
+                    </button>
+                    <button
+                        onClick={() => {
+                            audio && audio.pause();
+                        }}
+                    >
+                        Pause
+                    </button>
+
                     <Player
                         src={[
                             "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
@@ -81,7 +106,7 @@ export default class App extends PureComponent {
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
                         isDark={true}
-                        onLoad={(data)=>console.log(data)}
+                        onLoad={this.onPlayerReady}
                     />
                     <p>
                         Source:
@@ -95,10 +120,10 @@ export default class App extends PureComponent {
                         <input
                             type="file"
                             className="file-input"
-                            id="file-input"
+                            id="audio_file"
                             name="audio_file"
                             accept="audio/*"
-                            onChange={(e) => this.onChange(e)}
+                            onChange={this.onChange}
                             hidden
                         />
                         <label htmlFor="audio-file">

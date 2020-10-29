@@ -66,6 +66,7 @@ class PlayerComponent extends Component {
         const meta = {
             duration: Math.round(sound.duration()),
             volume: sound.volume(),
+            audio: sound,
         };
 
         this.setState(
@@ -73,7 +74,7 @@ class PlayerComponent extends Component {
                 playerState: STATE.READY,
                 duration: this.formatTime(Math.round(sound.duration())),
             },
-            onLoad ? () => onLoad(meta) : undefined,
+            onLoad && typeof onLoad === "function" ? () => onLoad(meta) : undefined,
         );
     };
 
@@ -96,6 +97,10 @@ class PlayerComponent extends Component {
 
         sound.on("play", () => {
             this.stepInterval = setInterval(this.step, 15);
+        });
+
+        sound.on("pause", () => {
+            this.playbackPause();
         });
 
         this.setState({
@@ -135,7 +140,9 @@ class PlayerComponent extends Component {
 
     playbackPause = () => {
         const { sound } = this.state;
-        sound.pause();
+        if (sound.playing()) {
+            sound.pause();
+        }
         clearInterval(this.stepInterval);
         this.setState({
             playerState: STATE.PAUSE,

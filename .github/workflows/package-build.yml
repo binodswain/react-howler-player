@@ -22,7 +22,7 @@ jobs:
                   node-version: 12
             - run: npm i
             - run: npm run lint:js
-            - run: npm test
             - run: npm run build
+            - run: npm test
               env:
                   CI: true
