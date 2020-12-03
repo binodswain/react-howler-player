@@ -463,6 +463,7 @@ class PlayerComponent extends Component {
             style["r-howler"],
             style[isDark ? "dark-themed" : "light-themed"],
         ].join(" ");
+
         let btnFunction = undefined;
         let btnAttrs = {};
 
@@ -598,7 +599,12 @@ class PlayerComponent extends Component {
         if (profile === "top_progress") {
             markup = (
                 <Fragment>
-                    <div className={pStyle[`profile_${profile}`]}>
+                    <div
+                        className={pStyle[`profile_${profile}`]}
+                        style={{
+                            "--progressbar-radius": 0,
+                        }}
+                    >
                         {progressBar}
                         <div className={style["player-controls"]}>
                             <div className={style["left-controls"]}>
