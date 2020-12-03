@@ -75,25 +75,28 @@ export default class App extends PureComponent {
                         speedPanel={"top"}
                         profile="generic"
                     />
-                    <h5>
-                        <a
-                            href="http://https://librivox.org/pride-and-prejudice-by-jane-austen-solo-project/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {" "}
-                            Pride and Prejudice (version 2)
-                        </a>
-                    </h5>
 
-                    {/* <Player
-                                       src={[
-                                           "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
-                                       ]}
-                                       onTimeUpdate={this.timeUpdate}
-                                       preparingComp={<Loading />}
-                                       speedPanel={"top"}
-                                   /> */}
+                    <Player
+                        src={[
+                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                        ]}
+                        speedPanel={"bottom"}
+                        onTimeUpdate={this.timeUpdate}
+                        // isDark={true}
+                        onLoad={(data) => console.log(data)}
+                        profile="top_progress"
+                    />
+
+                    <Player
+                        src={[
+                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                        ]}
+                        speedPanel={"bottom"}
+                        onTimeUpdate={this.timeUpdate}
+                        profile="minimal"
+                        isDark={true}
+                        onLoad={this.onPlayerReady}
+                    />
                     <button
                         onClick={() => {
                             audio && audio.play();
@@ -108,28 +111,6 @@ export default class App extends PureComponent {
                     >
                         Pause
                     </button>
-
-                    <Player
-                        src={[
-                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
-                        ]}
-                        speedPanel={"bottom"}
-                        onTimeUpdate={this.timeUpdate}
-                        // isDark={true}
-                        onLoad={(data) => console.log(data)}
-                        profile="top_progress"
-                    />
-                    <Player
-                        src={[
-                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
-                        ]}
-                        speedPanel={"bottom"}
-                        onTimeUpdate={this.timeUpdate}
-                        onLoad={(data) => console.log(data)}
-                        profile="minimal"
-                        isDark={true}
-                        onLoad={this.onPlayerReady}
-                    />
                     <p>
                         Source:
                         https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3
