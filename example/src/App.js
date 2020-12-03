@@ -65,7 +65,8 @@ export default class App extends PureComponent {
                 </h1>
                 <div className="playerlist">
                     <h3>1. Audio from remote url</h3>
-
+                    
+                    <h4>default profile</h4>
                     <Player
                         src={[
                             "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
@@ -76,6 +77,7 @@ export default class App extends PureComponent {
                         profile="generic"
                     />
 
+                    <h4>top_progress profile</h4>
                     <Player
                         src={[
                             "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
@@ -87,6 +89,7 @@ export default class App extends PureComponent {
                         profile="top_progress"
                     />
 
+                    <h4>minimal profile</h4>
                     <Player
                         src={[
                             "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
