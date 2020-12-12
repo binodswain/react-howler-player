@@ -1,0 +1,11 @@
+{
+    "data": {
+        "site": {
+            "siteMetadata": {
+                "title": "react-howler-player",
+                "description": "React package to render player UI with howler.js audio library.",
+                "author": "@swain_binod"
+            }
+        }
+    }
+}

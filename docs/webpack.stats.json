@@ -1,69 +1,87 @@
 {
     "errors": [],
-    "warnings": [
-        "./node_modules/React/cjs/react.production.min.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/React/cjs/react.production.min.js\n    Used by 1 module(s), i. e.\n    /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/React/index.js\n* /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/react/cjs/react.production.min.js\n    Used by 1 module(s), i. e.\n    /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/react/index.js",
-        "./node_modules/React/index.js\nThere are multiple modules with names that only differ in casing.\nThis can lead to unexpected behavior when compiling on a filesystem with other case-semantic.\nUse equal casing. Compare these module identifiers:\n* /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/React/index.js\n    Used by 6 module(s), i. e.\n    /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/gatsby/dist/utils/babel-loader.js??ref--4-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/src/components/githubFork.js\n* /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/babel-loader/lib/index.js??ref--11-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/react/index.js\n    Used by 133 module(s), i. e.\n    /mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/node_modules/gatsby/dist/utils/babel-loader.js??ref--4-0!/mnt/c/Users/binod/Documents/codes/GitHub/NPM Package/react-component/react-howler-player/website/.cache/production-app.js"
-    ],
+    "warnings": [],
     "namedChunkGroups": {
-        "app": {
-            "chunks": [5, 0, 2],
+        "polyfill": {
+            "chunks": [2, 0, 7],
             "assets": [
-                "webpack-runtime-6929399e6332a649b18a.js",
-                "webpack-runtime-6929399e6332a649b18a.js.map",
-                "commons-76672a217ef59ef263de.js",
-                "commons-76672a217ef59ef263de.js.map",
-                "app-d13443566b0bf0002720.js",
-                "app-d13443566b0bf0002720.js.map"
+                "webpack-runtime-fc6e606e019c268884aa.js",
+                "webpack-runtime-fc6e606e019c268884aa.js.map",
+                "commons-ec534e125cfd5ed26362.js",
+                "commons-ec534e125cfd5ed26362.js.map",
+                "polyfill-5acc46d2c6294ee52fa0.js",
+                "polyfill-5acc46d2c6294ee52fa0.js.map"
+            ],
+            "children": {},
+            "childAssets": {}
+        },
+        "app": {
+            "chunks": [2, 6, 0, 3],
+            "assets": [
+                "webpack-runtime-fc6e606e019c268884aa.js",
+                "webpack-runtime-fc6e606e019c268884aa.js.map",
+                "framework-d585a04b7d285a7760d6.js",
+                "framework-d585a04b7d285a7760d6.js.map",
+                "commons-ec534e125cfd5ed26362.js",
+                "commons-ec534e125cfd5ed26362.js.map",
+                "app-be176b4aa790668460fd.js",
+                "app-be176b4aa790668460fd.js.map"
             ],
             "children": {},
             "childAssets": {}
         },
         "component---src-pages-index-js": {
-            "chunks": [1, 0, 3],
+            "chunks": [1, 0, 4],
             "assets": [
-                "styles.486f1a355734f2701895.css",
-                "styles-be526f7942cde387e731.js",
-                "styles-be526f7942cde387e731.js.map",
-                "commons-76672a217ef59ef263de.js",
-                "commons-76672a217ef59ef263de.js.map",
-                "component---src-pages-index-js-51e39d505bb7f0da9d11.js",
-                "component---src-pages-index-js-51e39d505bb7f0da9d11.js.map"
+                "styles.1c75f0d5415d74ab1c24.css",
+                "styles-e9d24b1846c7d6eb9685.js",
+                "styles-e9d24b1846c7d6eb9685.js.map",
+                "commons-ec534e125cfd5ed26362.js",
+                "commons-ec534e125cfd5ed26362.js.map",
+                "component---src-pages-index-js-9067ad30ba12813aad99.js",
+                "component---src-pages-index-js-9067ad30ba12813aad99.js.map"
             ],
             "children": {},
             "childAssets": {}
         },
         "component---src-pages-local-file-js": {
-            "chunks": [1, 0, 4],
+            "chunks": [1, 0, 5],
             "assets": [
-                "styles.486f1a355734f2701895.css",
-                "styles-be526f7942cde387e731.js",
-                "styles-be526f7942cde387e731.js.map",
-                "commons-76672a217ef59ef263de.js",
-                "commons-76672a217ef59ef263de.js.map",
-                "component---src-pages-local-file-js-ef233b521793b7a196d2.js",
-                "component---src-pages-local-file-js-ef233b521793b7a196d2.js.map"
+                "styles.1c75f0d5415d74ab1c24.css",
+                "styles-e9d24b1846c7d6eb9685.js",
+                "styles-e9d24b1846c7d6eb9685.js.map",
+                "commons-ec534e125cfd5ed26362.js",
+                "commons-ec534e125cfd5ed26362.js.map",
+                "component---src-pages-local-file-js-5b1ba61aa1d9036a546b.js",
+                "component---src-pages-local-file-js-5b1ba61aa1d9036a546b.js.map"
             ],
             "children": {},
             "childAssets": {}
         }
     },
     "assetsByChunkName": {
+        "polyfill": [
+            "webpack-runtime-fc6e606e019c268884aa.js",
+            "commons-ec534e125cfd5ed26362.js",
+            "polyfill-5acc46d2c6294ee52fa0.js"
+        ],
         "app": [
-            "webpack-runtime-6929399e6332a649b18a.js",
-            "commons-76672a217ef59ef263de.js",
-            "app-d13443566b0bf0002720.js"
+            "webpack-runtime-fc6e606e019c268884aa.js",
+            "framework-d585a04b7d285a7760d6.js",
+            "commons-ec534e125cfd5ed26362.js",
+            "app-be176b4aa790668460fd.js"
         ],
         "component---src-pages-index-js": [
-            "styles.486f1a355734f2701895.css",
-            "styles-be526f7942cde387e731.js",
-            "commons-76672a217ef59ef263de.js",
-            "component---src-pages-index-js-51e39d505bb7f0da9d11.js"
+            "styles.1c75f0d5415d74ab1c24.css",
+            "styles-e9d24b1846c7d6eb9685.js",
+            "commons-ec534e125cfd5ed26362.js",
+            "component---src-pages-index-js-9067ad30ba12813aad99.js"
         ],
         "component---src-pages-local-file-js": [
-            "styles.486f1a355734f2701895.css",
-            "styles-be526f7942cde387e731.js",
-            "commons-76672a217ef59ef263de.js",
-            "component---src-pages-local-file-js-ef233b521793b7a196d2.js"
+            "styles.1c75f0d5415d74ab1c24.css",
+            "styles-e9d24b1846c7d6eb9685.js",
+            "commons-ec534e125cfd5ed26362.js",
+            "component---src-pages-local-file-js-5b1ba61aa1d9036a546b.js"
         ]
     }
 }

@@ -1,1 +1,6 @@
-{"componentChunkName":"component---src-pages-local-file-js","path":"/local-file/","result":{"pageContext":{}}}
+{
+    "componentChunkName": "component---src-pages-local-file-js",
+    "path": "/local-file/",
+    "result": { "pageContext": {} },
+    "staticQueryHashes": ["63159454", "652469026"]
+}
