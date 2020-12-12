@@ -2,7 +2,7 @@ module.exports = {
   pathPrefix: "/react-howler-player",
   siteMetadata: {
     title: `react-howler-player`,
-    description: `React package to render UI with howler.js sound`,
+    description: `React package to render player UI with howler.js audio library.`,
     author: `@swain_binod`,
   },
   plugins: [
@@ -16,7 +16,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-sass`
+    `gatsby-plugin-sass`,
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
