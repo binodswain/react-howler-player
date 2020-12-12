@@ -70,6 +70,13 @@ $themes: dark light;
 @mixin rangeTrack {
     width: 100%;
     height: 5px;
+    border-radius: var(--progressbar-radius, 4px);
+    cursor: pointer;
+}
+
+@mixin rangeTrackVolume {
+    width: 100%;
+    height: 5px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -95,10 +102,10 @@ $themes: dark light;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            height: 45px;
+            min-height: 45px;
             box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
             background-color: map-get($background-color, $theme);
-            border-radius: 4px;
+            // border-radius: 4px;
         }
 
         .player-controls {
@@ -182,34 +189,8 @@ $themes: dark light;
             display: flex;
             align-items: center;
             position: relative;
-
-            .progress {
-                position: absolute;
-                height: 5px;
-                width: 100%;
-                border-radius: 5px;
-                -webkit-appearance: none;
-                appearance: none;
-                z-index: 3;
-
-                @supports (-moz-appearance: none) {
-                    display: none;
-                }
-                // margin: 0 5px;
-                &::-moz-progress-bar {
-                    display: none;
-                }
-
-                &::-webkit-progress-bar {
-                    background-color: black;
-                    border-radius: 5px;
-                }
-                &::-webkit-progress-value {
-                    border-radius: 5px;
-                    background-color: white;
-                }
-            }
         }
+
         .player-progress {
             // https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
             width: 100%;
@@ -219,24 +200,25 @@ $themes: dark light;
             height: 4px;
             border-radius: 4px;
             min-width: 50px;
+            margin: 0;
             // background: transparent;
             z-index: 2;
 
             &::-moz-range-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 
             &::-ms-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 
             &::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                @include rangeThumb;
+                // @include rangeThumb;
                 background: map-get($slider-thumb-color, $theme);
             }
 
@@ -312,7 +294,7 @@ $themes: dark light;
 
                 // Track
                 &::-webkit-slider-runnable-track {
-                    @include rangeTrack;
+                    @include rangeTrackVolume;
                     background: linear-gradient(
                         to right,
                         map-get($range-track-progress-color, $theme),
@@ -323,12 +305,12 @@ $themes: dark light;
                 }
 
                 &::-moz-range-track {
-                    @include rangeTrack;
+                    @include rangeTrackVolume;
                     background: map-get($range-track-color, $theme);
                 }
 
                 &::-ms-track {
-                    @include rangeTrack;
+                    @include rangeTrackVolume;
                     background: map-get($range-track-color, $theme);
                 }
 

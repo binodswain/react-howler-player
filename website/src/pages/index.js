@@ -83,6 +83,10 @@ const IndexPage = () => {
         <pre className="line-numbers">
           <code className="language-jsx">{htmlcode}</code>
         </pre>
+
+        <a href="https://github.com/binodswain/react-howler-player#readme" target="_blank">
+          More config
+        </a>
       </Layout>
       <Footer />
     </>

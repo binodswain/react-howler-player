@@ -12,6 +12,7 @@ function Loading() {
 export default class App extends PureComponent {
     state = {
         audio: null,
+        dark: false,
     };
     onChange = (event) => {
         console.log(`[onChange]`, event);
@@ -52,6 +53,11 @@ export default class App extends PureComponent {
         this.setState({ audio: data.audio });
     };
 
+    toggleDarkMode = () => {
+        this.setState({
+            dark: !this.state.dark,
+        });
+    };
     render() {
         const { file_path, name, audio } = this.state;
         console.log(audio);
@@ -65,25 +71,44 @@ export default class App extends PureComponent {
                 </h1>
                 <div className="playerlist">
                     <h3>1. Audio from remote url</h3>
-                    <h5>
-                        <a
-                            href="http://https://librivox.org/pride-and-prejudice-by-jane-austen-solo-project/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {" "}
-                            Pride and Prejudice (version 2)
-                        </a>
-                    </h5>
+                    <button onClick={this.toggleDarkMode}>
+                        toggle Dark Mode
+                    </button>
+                    <h4>default profile</h4>
+                    <Player
+                        src={[
+                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                        ]}
+                        onTimeUpdate={this.timeUpdate}
+                        preparingComp={<Loading />}
+                        speedPanel={"top"}
+                        isDark={this.state.dark}
+                        profile="generic"
+                    />
 
-                    {/* <Player
-                                       src={[
-                                           "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
-                                       ]}
-                                       onTimeUpdate={this.timeUpdate}
-                                       preparingComp={<Loading />}
-                                       speedPanel={"top"}
-                                   /> */}
+                    <h4>top_progress profile</h4>
+                    <Player
+                        src={[
+                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                        ]}
+                        speedPanel={"bottom"}
+                        onTimeUpdate={this.timeUpdate}
+                        isDark={this.state.dark}
+                        onLoad={(data) => console.log(data)}
+                        profile="top_progress"
+                    />
+
+                    <h4>minimal profile</h4>
+                    <Player
+                        src={[
+                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                        ]}
+                        speedPanel={"bottom"}
+                        onTimeUpdate={this.timeUpdate}
+                        profile="minimal"
+                        isDark={this.state.dark}
+                        onLoad={this.onPlayerReady}
+                    />
                     <button
                         onClick={() => {
                             audio && audio.play();
@@ -98,23 +123,13 @@ export default class App extends PureComponent {
                     >
                         Pause
                     </button>
-
-                    <Player
-                        src={[
-                            "http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3",
-                        ]}
-                        speedPanel={"bottom"}
-                        onTimeUpdate={this.timeUpdate}
-                        isDark={true}
-                        onLoad={this.onPlayerReady}
-                    />
                     <p>
                         Source:
-                        http://www.archive.org/download/solo_pride_librivox/prideandprejudice_01-04_austen_apc_64kb.mp3
+                        https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3
                     </p>
                 </div>
 
-                <div>
+                <div hidden>
                     <h3>2. Audio from local file</h3>
                     <div className="form-element">
                         <input

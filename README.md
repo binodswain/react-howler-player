@@ -72,6 +72,7 @@ One player instance with remote URL and one with local file.
 | preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp                                |  | loadingText)` |
 | speedPanel    |  string   |   true   | Position of audio playback rate list. ('top', 'bottom', 'relative'). defaultVal : 'relative' |
 | onLoad        | function  |   true   | Callback function that passes howler audio instance and couple of basic information          |
+| profile       |  string   |   true   | Player profile. ['generic', 'minimal', 'top_progress']                                       |
 
 ## Features:
 
