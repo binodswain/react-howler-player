@@ -49,7 +49,11 @@ const App = () => {
 
 ```bash
 git clone git@github.com:binodswain/react-howler-player.git
-cd react-howler-player/example
+cd react-howler-player
+npm i
+npm run build
+
+cd example
 npm i
 npm start
 ```
@@ -57,9 +61,15 @@ npm start
 This will start a React app (bootstrapped with create-react-app) with multiple player instances.
 One player instance with remote URL and one with local file.
 
-## Screenshot
+## Screenshots
 
-![Screenshot 1](/example/react-howler-player.png?raw=true "player")
+### Default Player
+
+![Screenshot 1](/example/player-light.png?raw=true "player")
+
+### Player with dark mode
+
+![Screenshot 2](/example/player-dark.png?raw=true "player darkmode")
 
 ## Props passed to component
 

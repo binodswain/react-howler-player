@@ -71,13 +71,11 @@ export default class App extends PureComponent {
                 </h1>
                 <div className="playerlist">
                     <h3>1. Audio from remote url</h3>
-                    <button onClick={this.toggleDarkMode}>
-                        toggle Dark Mode
-                    </button>
+                    <button onClick={this.toggleDarkMode}>toggle Dark Mode</button>
                     <h4>default profile</h4>
                     <Player
                         src={[
-                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                            "https://github.com/binodswain/react-howler-player/raw/master/example/audio_file.mp3",
                         ]}
                         onTimeUpdate={this.timeUpdate}
                         preparingComp={<Loading />}
@@ -89,7 +87,7 @@ export default class App extends PureComponent {
                     <h4>top_progress profile</h4>
                     <Player
                         src={[
-                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                            "https://github.com/binodswain/react-howler-player/raw/master/example/audio_file.mp3",
                         ]}
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
@@ -101,7 +99,7 @@ export default class App extends PureComponent {
                     <h4>minimal profile</h4>
                     <Player
                         src={[
-                            "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3",
+                            "https://github.com/binodswain/react-howler-player/raw/master/example/audio_file.mp3",
                         ]}
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
@@ -123,10 +121,6 @@ export default class App extends PureComponent {
                     >
                         Pause
                     </button>
-                    <p>
-                        Source:
-                        https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3
-                    </p>
                 </div>
 
                 <div hidden>
