@@ -617,10 +617,99 @@ pre tt:after {
 }
 
 .badges a {
-    padding-right: 5px;
+  padding-right: 5px;
 }
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
   }
+}
+
+.badges a {
+  padding-right: 5px;
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+.github-corner svg {
+  fill: var(--fork-color);
+}
+section {
+  padding-bottom: 20px;
+}
+
+:root {
+  --bg-color: black;
+  --text-color: white;
+  --banner-bg-color: black;
+  --banner-text-color: white;
+  --fork-color: #5000ca;
+}
+
+.dark-theme {
+  --bg-color: black;
+  --text-color: white;
+  --banner-bg-color: black;
+  --banner-text-color: white;
+}
+.light-theme {
+  --bg-color: white;
+  --text-color: black;
+  --banner-bg-color: black;
+  --banner-text-color: white;
+}
+
+.banner-sec {
+  background-color: var(--banner-bg-color);
+  color: var(--banner-text-color);
+  margin-bottom: 1.5em;
+}
+
+.banner-sec .banner-text {
+  margin: 2em 0 0;
+}
+
+.footer-sec {
+  background-color: var(--banner-bg-color);
+  color: var(--banner-text-color);
+  padding: 1em 0;
+}
+
+.footer-sec a {
+  color: white;
+}
+
+.demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.demo-header h2 {
+  margin-bottom: 0;
 }
