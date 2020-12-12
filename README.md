@@ -69,9 +69,10 @@ One player instance with remote URL and one with local file.
 | isDark        |  Boolean  |   true   | Flag to switch between light and dark theme                                                  |
 | onTimeUpdate  | function  |   true   | On playback progress, timestamp obj is passed to the function                                |
 | loadingText   | function  |   true   | Text displayed while preparing the playback.(default val: 'Preparing')                       |
-| preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp | | loadingText)`              |
+| preparingComp | JSX Comp. |   true   | Component to display instead of loading text. `(preparingComp                                |  | loadingText)` |
 | speedPanel    |  string   |   true   | Position of audio playback rate list. ('top', 'bottom', 'relative'). defaultVal : 'relative' |
 | onLoad        | function  |   true   | Callback function that passes howler audio instance and couple of basic information          |
+| profile       |  string   |   true   | Player profile. ['generic', 'minimal', 'top_progress']                                       |
 
 ## Features:
 

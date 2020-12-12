@@ -12,6 +12,7 @@ function Loading() {
 export default class App extends PureComponent {
     state = {
         audio: null,
+        dark: false,
     };
     onChange = (event) => {
         console.log(`[onChange]`, event);
@@ -52,6 +53,11 @@ export default class App extends PureComponent {
         this.setState({ audio: data.audio });
     };
 
+    toggleDarkMode = () => {
+        this.setState({
+            dark: !this.state.dark,
+        });
+    };
     render() {
         const { file_path, name, audio } = this.state;
         console.log(audio);
@@ -65,7 +71,9 @@ export default class App extends PureComponent {
                 </h1>
                 <div className="playerlist">
                     <h3>1. Audio from remote url</h3>
-                    
+                    <button onClick={this.toggleDarkMode}>
+                        toggle Dark Mode
+                    </button>
                     <h4>default profile</h4>
                     <Player
                         src={[
@@ -74,6 +82,7 @@ export default class App extends PureComponent {
                         onTimeUpdate={this.timeUpdate}
                         preparingComp={<Loading />}
                         speedPanel={"top"}
+                        isDark={this.state.dark}
                         profile="generic"
                     />
 
@@ -84,7 +93,7 @@ export default class App extends PureComponent {
                         ]}
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
-                        // isDark={true}
+                        isDark={this.state.dark}
                         onLoad={(data) => console.log(data)}
                         profile="top_progress"
                     />
@@ -97,7 +106,7 @@ export default class App extends PureComponent {
                         speedPanel={"bottom"}
                         onTimeUpdate={this.timeUpdate}
                         profile="minimal"
-                        isDark={true}
+                        isDark={this.state.dark}
                         onLoad={this.onPlayerReady}
                     />
                     <button

@@ -683,7 +683,7 @@ PlayerComponent.propTypes = {
     onTimeUpdate: PropTypes.func,
     speedPanel: PropTypes.string,
     onLoad: PropTypes.func,
-    profile: PropTypes.string,
+    profile: PropTypes.oneOf(["generic", "minimal", "top_progress"]),
 };
 
 export default PlayerComponent;
