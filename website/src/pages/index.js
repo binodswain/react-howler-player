@@ -9,7 +9,7 @@ import Footer from "../components/footer"
 import PackageLinks from "../components/packageLinks"
 
 const AUDIO_URL =
-  "https://github.com/binodswain/react-howler-player/raw/develop/example/audio_file.mp3"
+  "https://github.com/binodswain/react-howler-player/raw/master/example/audio_file.mp3"
 
 const htmlcode = `import React, { Component, PureComponent } from 'react
 import Player from "react-howler-player"
@@ -48,15 +48,34 @@ const IndexPage = () => {
         <section className="demo">
           <div className="demo-header">
             <h2>Demo</h2>
-            <button className="dark-mode" onClick={()=>setDarkMode(!darkMode)} type="button">
-              dark mode {darkMode ? 'on': "off"}
+            <button
+              className="dark-mode"
+              onClick={() => setDarkMode(!darkMode)}
+              type="button"
+            >
+              dark mode {darkMode ? "on" : "off"}
             </button>
           </div>
           {showPlayer ? (
             <ol>
               <li>
-                <h4>Default view</h4>
-                <Player src={[AUDIO_URL]} isDark={darkMode} />
+                <h4>default view</h4>
+                <Player src={[AUDIO_URL]} isDark={darkMode} profile="generic" />
+              </li>
+
+              <li>
+                <h4>top_progress profile</h4>
+                <Player
+                  src={[AUDIO_URL]}
+                  isDark={darkMode}
+                  onLoad={data => console.log(data)}
+                  profile="top_progress"
+                />
+              </li>
+
+              <li>
+                <h4>minimal profile</h4>
+                <Player src={[AUDIO_URL]} profile="minimal" isDark={darkMode} />
               </li>
               <li>
                 <Link to="/local-file/">
@@ -83,8 +102,10 @@ const IndexPage = () => {
         <pre className="line-numbers">
           <code className="language-jsx">{htmlcode}</code>
         </pre>
-
-        <a href="https://github.com/binodswain/react-howler-player#readme" target="_blank">
+        <a
+          href="https://github.com/binodswain/react-howler-player#readme"
+          target="_blank"
+        >
           More config
         </a>
       </Layout>
