@@ -81,7 +81,7 @@ class PlayerComponent extends Component {
 
     setupPlayer = () => {
         this.destroySound();
-        const { src, format = ["wav", "mp3", "flac", "aac"] } = this.props;
+        const { src, format = ["wav", "mp3", "flac", "aac"], onPlay, onPause, onEnd } = this.props;
 
         if (!src) {
             return;
@@ -94,14 +94,34 @@ class PlayerComponent extends Component {
 
         sound.once("load", this.readyToPlay);
 
-        sound.on("end", this.playbackEnded);
+        sound.on("end", () => {
+            this.playbackEnded();
+
+            // onEnd prop
+            onEnd && onEnd();
+        });
 
         sound.on("play", () => {
             this.stepInterval = setInterval(this.step, 15);
+
+            // onPlay prop
+            onPlay && onPlay();
         });
 
         sound.on("pause", () => {
+            // pause
             this.playbackPause();
+
+            // onPause prop
+            onPause && onPause();
+        });
+
+        sound.on("stop", () => {
+            this.setState({
+                playerState: STATE.ENDED,
+                progressValue: 0,
+                currentPos: "0:00",
+            });
         });
 
         this.setState({
@@ -116,6 +136,7 @@ class PlayerComponent extends Component {
     playbackEnded = () => {
         const { onTimeUpdate } = this.props;
         const { duration } = this.state;
+
         if (onTimeUpdate) {
             const playerState = {
                 currentTime: this.state.sound.duration(),
@@ -449,15 +470,8 @@ class PlayerComponent extends Component {
     };
 
     render() {
-        const {
-            playerState,
-            progressValue,
-            duration,
-            currentPos,
-            volume,
-            isMute,
-            ratePanel,
-        } = this.state;
+        const { playerState, progressValue, duration, currentPos, volume, isMute, ratePanel } =
+            this.state;
 
         const { isDark = false, profile = "generic" } = this.props;
 
@@ -681,6 +695,9 @@ PlayerComponent.propTypes = {
     loadingText: PropTypes.string,
     isDark: PropTypes.bool,
     onTimeUpdate: PropTypes.func,
+    onEnd: PropTypes.func,
+    onPlay: PropTypes.func,
+    onPause: PropTypes.func,
     speedPanel: PropTypes.string,
     onLoad: PropTypes.func,
     profile: PropTypes.oneOf(["generic", "minimal", "top_progress"]),
